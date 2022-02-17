@@ -19,8 +19,8 @@ import odes_solver as ODE_sol
 
 cache = diskcache.Cache('cache')
 long_callback_manager = DiskcacheLongCallbackManager(cache)
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], prevent_initial_callbacks=True)
-server=app.server
+application = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], prevent_initial_callbacks=True)
+server=application.server
 
 """
 1. Create componenents for the app
@@ -44,7 +44,7 @@ app_sidebar = nav.side_bar(id)
 2. App layout 
 """
 
-app.layout = dbc.Card([
+application.layout = dbc.Card([
     dbc.Container([
         dbc.Row(
             [
@@ -63,7 +63,7 @@ app.layout = dbc.Card([
 )
 
 
-@app.callback(
+@application.callback(
     Output(graph, 'figure'),
     Input(id, 'value')
 
@@ -150,7 +150,7 @@ def update_graph(case):
     return fig
 
 
-@app.callback(
+@application.callback(
     Output("data_model_1", 'columns'),
     Input(id, 'value')
 )
@@ -166,7 +166,7 @@ def update_dataTable(case):
     return dfc
 
 
-@app.callback(
+@application.callback(
     Output('data_model_1', 'data'),
     Input(id, 'value')
 )
@@ -183,7 +183,7 @@ def update_dataTable(case):
     return dfdt
 
 
-@app.callback(
+@application.callback(
     Output('tilt_model', 'children'),
     Input(id, 'value')
 
@@ -197,7 +197,7 @@ def update_title(case):
     return dc
 
 
-@app.callback(
+@application.callback(
     Output('data_model_2', 'data'),
     Input(id, 'value')
 )
@@ -215,7 +215,7 @@ def update_model_description(case):
     return dfmd
 
 
-@app.long_callback(
+@application.long_callback(
     Output(graph2, 'figure'),
     Input('odeint', 'n_clicks'),
     [State(id, 'value')],
@@ -261,7 +261,7 @@ def figure_ode_int(n_clicks, case):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    application.run_server(debug=True)
 """"
 def prom (exp_1,exp_2,prom) :
     for i in range(len(exp_1)):
