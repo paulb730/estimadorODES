@@ -80,7 +80,7 @@ html5lib
 idna
 imageio
 imagesize==1.2.0
-importlib-metadata @
+importlib-metadata
 intervaltree
 ipykernel
 ipython
