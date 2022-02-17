@@ -4,8 +4,9 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import pandas as pd # data science library
+import pandas as pd  # data science library
 from scipy.optimize import minimize
+
 """
 modos de modelo 
 
@@ -86,8 +87,7 @@ Vi(t+1)=w(t)Vi(t)+c1* r1(pbesti(t)-Xi(t)+c2*r2(gbest(t)-Xi(t)))
 Xi(t+1)=Xi(t)+Vi(t+1)
 """
 
-
-data=np.array(pd.read_csv("NoisyData.csv"))
+data = np.array(pd.read_csv("NoisyData.csv"))
 
 # %% pasos
 """
@@ -253,20 +253,3 @@ for k in range(1, n_iter + 1):
     flow.meas = z[k]
     m.solve()
     x2mhe[k] = flow.model
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

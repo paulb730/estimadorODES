@@ -1,8 +1,5 @@
 from __future__ import division
-from gekko import GEKKO
 import numpy as np
-import matplotlib.pyplot as plt
-import random
 
 
 # Author: Paul Benavides
@@ -118,7 +115,7 @@ class Partical:
         :return:
         """
         self._v = w * self._v + c1 * np.random.random() * (self.pbest - self.pos) + c2 * np.random.random() * (
-                    gbest - self.pos)
+                gbest - self.pos)
 
         for i in range(self.dim):
             self._v[i] = min(self._v[i], self.max_v[i])

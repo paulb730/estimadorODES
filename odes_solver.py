@@ -1,28 +1,14 @@
-import math
 import numpy as np
-import matplotlib.pyplot as plt
+
 from scipy.integrate import odeint
 import PSO as pso
-from scipy.optimize import least_squares
-import pandas as pd
-import chart_studio.plotly as ch
-import cufflinks as cf
-import seaborn as sns
-import plotly.express as px
+
 
 # Author: Paul Benavides
 # Derechos Reservados
 
 
-
-
-
-
-
-
-
-
-def objective_function(thetha,model,z,t,ymeasured):
+def objective_function(thetha, model, z, t, ymeasured):
     """
     :param thetha: vector de parámetros
     :param model: definición de modelo
@@ -32,9 +18,8 @@ def objective_function(thetha,model,z,t,ymeasured):
     :param ymodelo: y del modelo
     :return: función objetivo
     """
-    ymodelo=odeint(model,z,t,args=tuple(thetha)) # integración del modelo
-    return np.sum(np.power((ymodelo[:,1]-ymeasured),2))
-
+    ymodelo = odeint(model, z, t, args=tuple(thetha))  # integración del modelo
+    return np.sum(np.power((ymodelo[:, 1] - ymeasured), 2))
 
 
 def PSO_test(objective_function, pop, gen, xmin, xmax, c1, c2, w):
@@ -51,16 +36,15 @@ def PSO_test(objective_function, pop, gen, xmin, xmax, c1, c2, w):
     """""
     optimizador = pso.PSO(pop, gen, xmin, xmax, objective_function, c1, c2, w)
     fitlist, best_pos = optimizador.done()
-    vectthetha=[]
+    vectthetha = []
     for pos in best_pos:
         vectthetha.append(format(pos, '.4E'))
 
-    return [fitlist , vectthetha]
+    return [fitlist, vectthetha]
 
 
-
-def fitting_model_graph(thetha,t,z,model):
-    ymfitted=odeint(model,z,t,args=tuple(thetha))
+def fitting_model_graph(thetha, t, z, model):
+    ymfitted = odeint(model, z, t, args=tuple(thetha))
     return ymfitted
 
 

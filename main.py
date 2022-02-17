@@ -17,27 +17,18 @@ def print_hi(name):
 
 
 def modelo_prey_predator():
-    m=GEKKO()
-    b1=m.Param(1)
-    b2=m.Param(1)
+    m = GEKKO()
+    b1 = m.Param(1)
+    b2 = m.Param(1)
 
 
 def PSO_test():
-    pop=300
-    gen=100
-    x_min=[-10,10]
-    x_max=[10,10]
+    pop = 300
+    gen = 100
+    x_min = [-10, 10]
+    x_max = [10, 10]
     t_data = [0, 0.1, 0.2, 0.4, 0.8, 1]
     x_data = [2.0, 1.6, 1.2, 0.7, 0.3, 0.15]
-    pso.PSO(pop,gen,x_min,x_max)
-
-
-
-
-
-
-
-
-
+    pso.PSO(pop, gen, x_min, x_max)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
