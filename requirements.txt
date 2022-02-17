@@ -191,7 +191,7 @@ retrying==1.3.3
 rope==0.17.0
 Rtree
 ruamel-yaml==0.15.87
-scikit-image==0.16.2
+scikit-image
 scikit-learn
 scipy
 seaborn==0.10.1
@@ -212,8 +212,8 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
 sphinxcontrib-websupport
-spyder
-spyder-kernels
+
+
 SQLAlchemy
 statsmodels==0.11.1
 sympy
