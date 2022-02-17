@@ -108,7 +108,7 @@ mccabe==0.6.1
 
 Metashape
 mistune==0.8.4
-mkl-fft==1.1.0
+mkl-fft
 mkl-random==1.1.1
 mkl-service==2.3.0
 mock==4.0.2
