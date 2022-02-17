@@ -163,7 +163,7 @@ pyflakes==2.2.0
 Pygments==2.6.1
 pylint
 PyNaCl
-pyodbc===4.0.0-unsupported
+pyodbc
 PyOpenGL==3.1.5
 PyOpenGL-accelerate==3.1.5
 pyOpenSSL
