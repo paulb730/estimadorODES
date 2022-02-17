@@ -1,0 +1,94 @@
+.page-link{
+    color:#f2f2f2;
+    font-size:18px;
+    font-weight: 600;
+
+
+}
+
+.page-link:hover {
+
+     background-color: #f96d00 !important;
+      color:#f2f2f2;
+    font-size:18px;
+    font-weight: 600;
+}
+
+.page-link:active {
+    background-color: #f96d00 !important ;
+    color:#f2f2f2;
+    font-size:18px;
+    font-weight: 600;
+
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #f96d00 !important;
+    border-color:  #393e46 !important;
+}
+
+
+.button-link{
+
+    color:#f2f2f2;
+    font-size:12px;
+    font-weight: 600;
+    width: 100%;
+    height:auto;
+
+}
+
+.drop-dash{
+    display: inline-block;
+    color:#393e46;
+    font-size:12px;
+    font-weight: 600;
+    width: 220px;
+    height:auto;
+    background-color:#f96d00 !important ;
+
+}
+
+.Select-control{
+     background-color:#f96d00 !important ;
+     border: transparent;
+}
+
+.Select-placeholder{
+    color:#f2f2f2;
+}
+
+.Select-value-label{
+    color:#f2f2f2 !important;
+}
+
+.Select-clear-zone{
+ color:#f2f2f2 !important;
+}
+
+.Select-arrow{
+    border-color:#fff transparent transparent
+}
+
+.btn-primary:hover{
+background-color: #f96d00 !important ;
+ border-color:  #f96d00 !important;
+}
+
+.btn-primary:active{
+background-color: #f96d00 !important ;
+border-color:  #f96d00 !important;
+
+}
+
+
+
+@media(min-width:1200px){
+.container{
+
+ max-width:1700px !important;
+
+}
+}
+

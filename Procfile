@@ -1,0 +1,1 @@
+web: gunicorn plotly_interface:server
