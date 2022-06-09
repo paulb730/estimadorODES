@@ -2,13 +2,16 @@ import numpy as np
 
 from scipy.integrate import odeint
 import PSO as pso
-
+from numpy import linalg
 
 # Author: Paul Benavides
 # Derechos Reservados
 
 
-def objective_function(thetha, model, z, t, ymeasured):
+def fitting_model_graph(thetha, t, z, model):
+    ymfitted = odeint(model, z, t, args=tuple(thetha))
+    return ymfitted
+def objective_function(thetha,z,t,model, ymeas,index):
     """
     :param thetha: vector de parámetros
     :param model: definición de modelo
@@ -18,10 +21,10 @@ def objective_function(thetha, model, z, t, ymeasured):
     :param ymodelo: y del modelo
     :return: función objetivo
     """
-    ymodelo = odeint(model, z, t, args=tuple(thetha))  # integración del modelo
-    return np.sum(np.power((ymodelo[:, 1] - ymeasured), 2))
 
-
+    Tp=fitting_model_graph(thetha,t, z ,model)
+    vectfinal=np.sum(np.power((Tp[:, index] - ymeas) / ymeas, 2))
+    return vectfinal
 def PSO_test(objective_function, pop, gen, xmin, xmax, c1, c2, w):
     """"
     :param objective_function: espacio de búsqueda de las partículas  
@@ -43,9 +46,7 @@ def PSO_test(objective_function, pop, gen, xmin, xmax, c1, c2, w):
     return [fitlist, vectthetha]
 
 
-def fitting_model_graph(thetha, t, z, model):
-    ymfitted = odeint(model, z, t, args=tuple(thetha))
-    return ymfitted
+
 
 
 """

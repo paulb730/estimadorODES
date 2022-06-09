@@ -1,23 +1,31 @@
 .page-link{
     color:#f2f2f2;
-    font-size:18px;
+    font-size:14px;
     font-weight: 600;
 
 
 }
 
+.page-link_2{
+     color:#f96d00 ;
+     font-size:14px;
+    font-weight: 600;
+
+}
+
+
 .page-link:hover {
 
      background-color: #f96d00 !important;
-      color:#f2f2f2;
-    font-size:18px;
+     color:#f2f2f2;
+    font-size:12px;
     font-weight: 600;
 }
 
 .page-link:active {
     background-color: #f96d00 !important ;
     color:#f2f2f2;
-    font-size:18px;
+    font-size:12px;
     font-weight: 600;
 
 }
@@ -27,6 +35,27 @@
     background-color: #f96d00 !important;
     border-color:  #393e46 !important;
 }
+
+.btn-secondary {
+    color: #fff;
+    background-color: #222831 !important;
+    border-color:  #222831 !important;
+}
+
+.btn-secondary:hover {
+
+ border-color:  #f96d00 !important;
+}
+
+.btn-secondary:active,.btn-secondary:focus {
+
+    background-color: #f96d00 !important ;
+    color: #fff !important ;
+    border-color:  #f96d00 !important;
+}
+
+
+
 
 
 .button-link{

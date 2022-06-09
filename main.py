@@ -1,3 +1,4 @@
+"""
 # This is a sample Python script.
 from gekko import GEKKO
 
@@ -32,3 +33,7 @@ def PSO_test():
     pso.PSO(pop, gen, x_min, x_max)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+"""
+
+

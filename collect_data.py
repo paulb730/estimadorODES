@@ -5,6 +5,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 from dash import dcc
 import math
+import plotly.graph_objects as go
+
+
 
 # Se plantearán 4 casos de estudio para la aplicación de las técnicas de Estimación a usar
 
@@ -28,59 +31,16 @@ model_data = {
 
 model_analytic = ["Variables", "Parametros", "Ecuaciones", "Condiciones Iniciales"]
 
-columns_ob = {
 
-    0: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ],
-    1: [
-        {"Variables": "y1", "Parametros": "p1", "Ecuaciones": 'dy1dt = p1 * (27.8 - y1) +'
-                                                              ' (p4 / 2.6) * (y2 - y1) + (4991 /'
-                                                              ' t * math.sqrt(2 * math.pi)) * '
-                                                              'math.exp(-0.5*(math.log(t) - p2 / p3))',
-         "Condiciones Iniciales": "y(0.1)=(21.00,38.75)"},
-        {"Variables": "y2", "Parametros": "p2", "Ecuaciones": ' dy2dt = (p4 / 2.7) * (y1 - y2)',
-         " Condiciones Iniciales": ""},
-        {"Variables": "t", "Parametros": "p3", "Ecuaciones": "f(t,y,y',p)= -(5.3/7.02*p4*y')- p1*y'"
-                                                             "+ (p1*p4/2.7)*(27.8-y)+(1991/t^2)*((p4/2.7)*t-1-w/p3)*math.exp(-w^2/2)   ",
-         "Condiciones Iniciales": ""},
-        {"Parametros": "p4", }
-    ],
-    2: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ],
-    3: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ],
-    4: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ],
-    5: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ],
-    6: [
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]},
-        {"Variables": [0, 0, 0], "Parametros": [0, 0, 0], "Ecuaciones": [0, 0, 0], "Condiciones Iniciales": [0, 0, 0]}
-    ]
+parametros_titulos=["Parametros","ValorEstimado","Algoritmo Usado","Error %"]
 
-}
+
+
+
+
+
+
+
 
 
 def prom(exp_1, exp_2, prom):
@@ -144,7 +104,7 @@ def CASOS(case):
         columns=[],
         data=[],
         style_cell={'fontSize': '12px', 'borderRadius': '15px !important'},
-        style_header={'background': '#f96d00', 'color': '#fff', 'fontSize': '12px', 'textAlign': 'center'},
+        style_header={'background': '#008cf9', 'color': '#fff', 'fontSize': '12px', 'textAlign': 'center'},
         style_table={'overflowY': 'auto', 'height': 'auto', 'width': 'auto'},
         style_data={'whiteSpace': 'normal'},
         virtualization=True
@@ -173,13 +133,29 @@ def GRAFICOS(id):
     )
 
 
+
+def grafico_objetivo():
+    return go.Figure(data=[])
+
 def MODELO(case):
     return dash_table.DataTable(
         id="data_model_2",
         columns=[{"name": i, "id": i} for i in model_analytic],
         data=[],
         style_cell={'fontSize': '12px', 'borderRadius': '15px !important'},
-        style_header={'background': '#f96d00', 'color': '#fff', 'fontSize': '12px', 'textAlign': 'center'},
+        style_header={'background': '#008cf9', 'color': '#fff', 'fontSize': '12px', 'textAlign': 'center'},
+        style_table={'height': 'auto', 'width': 'auto', 'borderRadius': '15px !important'},
+        style_data={'whiteSpace': 'normal', 'height': 'auto'},
+        virtualization=False
+    )
+
+def parametros(case):
+    return dash_table.DataTable(
+        id="parameter_model",
+        columns=[{"name": i, "id": i} for i in parametros_titulos],
+        data=[],
+        style_cell={'fontSize': '12px', 'borderRadius': '15px !important'},
+        style_header={'background': '#008cf9', 'color': '#fff', 'fontSize': '12px', 'textAlign': 'center'},
         style_table={'height': 'auto', 'width': 'auto', 'borderRadius': '15px !important'},
         style_data={'whiteSpace': 'normal', 'height': 'auto'},
         virtualization=False

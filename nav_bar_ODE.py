@@ -48,8 +48,8 @@ NAV_BAR_STYLE = {
 
 }
 
-names = [["Casos de Estudio", 0], ["Modelo Enzimático", 1], ["Dinámica Hepatitis", 2], ["Dinámica Hepatitis 10%", 3],
-         ["Dinámica Hepatitis 15%", 4], ["Dinámica HIV", 5], ["Modelo de Cinética Química", 6]]
+names = [["Casos de Estudio", 0], ["Modelo Enzimático", 1], ["Dinámica Hepatitis ", 2], ["Lotka Volterra", 3],
+         ["", 4], ["Dinámica HIV", 5], ["Modelo de Cinética Química", 6]]
 
 names = np.array(names)
 
@@ -82,35 +82,31 @@ def nav_bar():
 
 def side_bar(id):
     return html.Div(
-        [
-            html.H2("Funciones", className="display-6"),
+        [   html.H3("Aplicaciones"),
+            html.Hr(),
+
+            dbc.Nav(
+                [
+                    dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash ")),
+                    html.Br(),
+                    dbc.NavLink(dbc.Button("Funcionamiento PSO", className="button-link " ,color="primary",href="/bench"))
+
+                ],
+                vertical=True
+            ),
+
+            html.H3("Funciones", className="display-6"),
             html.Hr(),
             html.P("Algoritmos"),
             dbc.Nav(
                 [
-
-                    dbc.NavLink(str(n), href="/" + str(n), className="page-link") for n in const.algoritmos
+                    dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list',class_name="btn-secondary"),
 
                 ],
-                vertical=True,
+                vertical="md",
                 pills=True,
-
             ),
 
-            html.Hr(),
-            html.P("Aplicaciones"),
-
-            dbc.Nav(
-
-                [
-                    dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash ")),
-                    html.Br(),
-                    dbc.NavLink(dbc.Button("Benchmark", className="button-link"))
-
-                ],
-                vertical=True
-
-            )
         ],
         style=SIDEBAR_STYLE,
     )

@@ -11,31 +11,64 @@ from dash.exceptions import PreventUpdate
 from dash.long_callback import DiskcacheLongCallbackManager
 import diskcache
 import odes_solver as ODE_sol
+import constantes as const
+import time
+
+import plotly.graph_objects as go
+
 
 # Author: Paul Benavides
 # Derechos Reservados
 
 # Create app
 
+MATHJAX_CDN = '''
+https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/
+MathJax.js?config=TeX-MML-AM_CHTML'''
+
+
+external_scripts = [
+                    {'type': 'text/javascript',
+                     'id': 'MathJax-script',
+                     'src': MATHJAX_CDN,
+                     },
+                    ]
+
 cache = diskcache.Cache('cache')
 long_callback_manager = DiskcacheLongCallbackManager(cache)
-application = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], prevent_initial_callbacks=True)
+
+application = dash.Dash(__name__,external_scripts=external_scripts,external_stylesheets=[dbc.themes.BOOTSTRAP], prevent_initial_callbacks=True)
 server=application.server
 
 """
 1. Create componenents for the app
 
 """
-
 # Barra de navegacion
 app_nav = nav.nav_bar()
 # Contenido del modelo
 value_change = 0
 value_change_2 = 0
+value_change_3=0
+#Grafico de la data
 graph = "my_graph"
+#Grafico integrador
 graph2 = "my_graph_2"
+#Grafico funcion objetiva
+graph3="my_graph_3"
+#Grafico proceso de algoritmo(solo PSO)
+graph4="my_graph_4"
+#Grafico fitting  experimental with simulated data
+graph5="my_graph_5"
+#Nombre del algoritmo
+algo="t"
+#Model data card
 app_cont_1 = ctif.model_data(value_change, graph)
+#Model description card
 app_cont_2 = ctif.model_description(value_change_2, graph2)
+#Optimización card
+app_cont_3=ctif.algoritmo_proceso(algo,value_change_3,graph3,graph4,graph5)
+#ID dropdown
 id = "dpdw"
 # Barra lateral
 app_sidebar = nav.side_bar(id)
@@ -44,15 +77,17 @@ app_sidebar = nav.side_bar(id)
 2. App layout 
 """
 
+
+
 application.layout = dbc.Card([
     dbc.Container([
         dbc.Row(
             [
                 dbc.Col(
-                    app_sidebar, sm=3, style=nav.NAV_BAR_STYLE
+                    app_sidebar, sm=2, style=nav.NAV_BAR_STYLE
                 ),
 
-                dbc.Col([app_nav, app_cont_1, app_cont_2], style=nav.NAV_BAR_STYLE, sm=9),
+                dbc.Col([app_nav, app_cont_1, app_cont_2,app_cont_3], style=nav.NAV_BAR_STYLE, sm=10),
 
             ]
         ),
@@ -66,21 +101,16 @@ application.layout = dbc.Card([
 @application.callback(
     Output(graph, 'figure'),
     Input(id, 'value')
-
 )
 def update_graph(case):
-    dff = px.data.iris()
-    fig = px.scatter(data_frame=dff, x='sepal_width', y='sepal_length', color='sepal_width')
-    if case == 'NoneType':
-        dff = px.data.iris()
-        fig = px.scatter(data_frame=dff, x='sepal_width', y='sepal_length', color='sepal_width')
+    dff = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+    fig = px.line(data_frame=dff, x='t', y='y', color='t')
+    if case is None or case == '0':
+        dff = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+        fig = px.line(data_frame=dff, x='t', y='y', color='t')
     else:
-        if case == '0':
-            dff = px.data.iris()
-            fig = px.scatter(data_frame=dff, x='sepal_width', y='sepal_length', color='sepal_width')
-
+        dff = colldat.model_data[int(case)]
         if case == '1':
-            dff = colldat.model_data[int(case)]
 
             fig = px.scatter(data_frame=dff, x='t', y='y1', color='t')
             fig.update_yaxes(
@@ -92,7 +122,7 @@ def update_graph(case):
                 type='linear'
             )
         if case == '2':
-            dff = colldat.model_data[int(case)]
+
             fig = px.scatter(data_frame=dff, x='tiempo', y='T', color='tiempo')
             fig.update_yaxes(
                 autorange=True,
@@ -103,7 +133,7 @@ def update_graph(case):
                 type='linear'
             )
         if case == '3':
-            dff = colldat.model_data[int(case)]
+
             fig = px.scatter(data_frame=dff, x='tiempo', y='T', color='tiempo')
             fig.update_yaxes(
                 autorange=True,
@@ -114,7 +144,7 @@ def update_graph(case):
                 type='linear'
             )
         if case == '4':
-            dff = colldat.model_data[int(case)]
+
             fig = px.scatter(data_frame=dff, x='tiempo', y='T', color='tiempo')
             fig.update_yaxes(
                 autorange=True,
@@ -125,7 +155,7 @@ def update_graph(case):
                 type='linear'
             )
         if case == '5':
-            dff = colldat.model_data[int(case)]
+
             fig = px.scatter(data_frame=dff, x='time', y='lv', color='time')
             fig.update_yaxes(
                 autorange=True,
@@ -136,7 +166,7 @@ def update_graph(case):
                 type='linear'
             )
         if case == '6':
-            dff = colldat.model_data[int(case)]
+
             fig = px.scatter(data_frame=dff, x='t', y='vectProm', color='t')
             fig.update_yaxes(
                 autorange=True,
@@ -155,11 +185,12 @@ def update_graph(case):
     Input(id, 'value')
 )
 def update_dataTable(case):
+    dfc = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
     if case is None:
-        dfc = [{"name": i, "id": i} for i in px.data.iris()]
+        raise PreventUpdate
     else:
         if case == "0":
-            dfc = [{"name": i, "id": i} for i in px.data.iris()]
+            dfc = [{"name": i, "id": i} for i in dfc]
         if case != "0" and case != 'NoneType':
             dfc = [{"name": i, "id": i} for i in colldat.model_data[int(case)].columns]
 
@@ -171,12 +202,15 @@ def update_dataTable(case):
     Input(id, 'value')
 )
 def update_dataTable(case):
-    dfdt = px.data.iris().to_dict("records")
+    dfdt = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+    dfd1=pd.DataFrame().from_dict(dfdt)
+
     if case is None:
-        dfdt = px.data.iris().to_dict("records")
+
+        raise PreventUpdate
     else:
         if case == "0":
-            dfdt = px.data.iris().to_dict("records")
+            dfdt = dfd1.to_dict("records")
         if case != '0':
             dfdt = colldat.model_data[int(case)].to_dict("records")
 
@@ -202,14 +236,14 @@ def update_title(case):
     Input(id, 'value')
 )
 def update_model_description(case):
-    df = pd.DataFrame().from_dict(colldat.columns_ob[0])
+    df = pd.DataFrame().from_dict(const.columns_ob[0])
     dfmd = df.to_dict("records")
     if case is None or case == '0':
-        df = pd.DataFrame(data=colldat.columns_ob[0])
-        dfmd = df.to_dict("records")
+        raise PreventUpdate
+
     else:
         if case != '0':
-            df = pd.DataFrame(data=colldat.columns_ob[int(case)])
+            df = pd.DataFrame(data=const.columns_ob[int(case)])
             dfmd = df.to_dict("records")
 
     return dfmd
@@ -223,42 +257,88 @@ def update_model_description(case):
 
 )
 def figure_ode_int(n_clicks, case):
-    dff = px.data.iris()
-    fig = px.scatter(data_frame=dff, x='sepal_width', y='sepal_length', color='sepal_width')
-    if case is None or case == '0':
-        raise PreventUpdate
-    else:
-        if case == '1':
-            df = colldat.model_data[int(1)]
-            init_model = {'z': [21.00, 30], 'thetha': [np.random.uniform(0.0001, 1), np.random.uniform(0.0001, 1),
-                                                       np.random.uniform(0.0001, 1), np.random.uniform(0.0001, 1)]}
-            ymodel = ODE_sol.odeint(colldat.modelo_enzi, init_model['z'], df['t'], args=tuple(init_model['thetha']))
-            print(ymodel)
-            data = {'t1': df['t'], 'y1': 1}
-            dff = {'t1': df['t'], 'y1': ymodel[:, 0]}
-            fig = px.line(dff, x="t1", y="y1", title='ODEINT')
-            fig.update_yaxes(
-                autorange=True,
-                type='linear'
-            )
-            fig.update_xaxes(
-                autorange=True,
-                type='linear'
-            )
-        if case == '2':
-            df = colldat.model_data[int(2)]
+    dff = {'t': [0,1,2,3,4], 'y': [1,1,1,1,1]}
+    fig = px.line(data_frame=dff, x='t', y='y', color='t')
+    fig.update_yaxes(
+        autorange=True,
+        type='linear'
+    )
+    fig.update_xaxes(
+        autorange=True,
+        type='linear'
+    )
 
-        if case == '3':
-            df = colldat.model_data[int(3)]
-        if case == '4':
-            df = colldat.model_data[int(4)]
-        if case == '5':
-            df = colldat.model_data[int(5)]
-        if case == '6':
-            df = colldat.model_data[int(6)]
+    if case is None or case == '0':
+        dff = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+        fig = px.line(data_frame=dff, x='t', y='y', color='t')
+    else:
+        df = colldat.model_data[int(case)]
+        if case == '1':
+            ymodel = ODE_sol.odeint(colldat.modelo_enzi, const.init_model_case_1['z'], df['t'], args=tuple(const.init_model_case_1['thetha']))
+            #dataframe
+            dff = {'t1': df['t'], 'y1': ymodel[:, 0]}
+            #graphicsettings
+            fig = px.line(dff, x="t1", y="y1", title='ODEINT')
+        if case== '2':
+            print(1)
 
     return fig
 
+@application.long_callback(
+    Output(graph5, 'figure'),
+    Input('algoexe', 'n_clicks'),
+    [State(id, 'value'),State('algo_list', 'value')],
+    manager=long_callback_manager
+
+)
+
+def algo_PSO(num_clicks,case,algo_num):
+    """
+     df = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+    fig = px.line(data_frame=df, x='t', y='y', color='t')
+
+    if case is None or case == '0':
+        raise PreventUpdate
+    else:
+        df = colldat.model_data[int(case)]
+        if case == '1':
+            if  list == 'PSO':
+                time.sleep(1)
+                objectivefunction = ODE_sol.objective_function(const.init_model_case_1['thetha'],
+                                                               const.init_model_case_1['z'],
+                                                               df['t'], colldat.modelo_enzi,
+                                                               df['y1'], 0)
+                print(objectivefunction)
+
+
+
+
+                 PSO_vect = ODE_sol.PSO_test(objectivefunction, 50, 50, [-1, -1, -1,-1],[1, 1, 1,1], 0.1, 0.1, 1)
+
+                fig = px.scatter(data_frame=df, x='t', y='y1', color='t')
+                fig.update_yaxes(
+                    autorange=True,
+                    type='linear'
+                )
+                fig.update_xaxes(
+                    autorange=True,
+                    type='linear'
+                )
+
+                ymodel_1 = ODE_sol.odeint(colldat.modelo_enzi, const.init_model_case_1['z'], df['t'],
+                                          args=tuple(PSO_vect[:, 1]))
+                # dataframe
+                dff = {'t1': df['t'], 'y1': ymodel_1[:, 0]}
+
+                # graphicsettings
+                fig = px.line(dff, x="t1", y="y1", title='PSO')
+                
+                """
+    df = {'t': [0, 1, 2, 3, 4], 'y': [1, 1, 1, 1, 1]}
+    fig = px.line(data_frame=df, x='t', y='y', color='t')
+
+
+    return fig
 
 if __name__ == '__main__':
     application.run_server(debug=True)
@@ -268,7 +348,7 @@ def prom (exp_1,exp_2,prom) :
        prom.append((exp_1[i]+exp_2[i])/2)
     return prom
 
-
+ 
 y2_prom = prom(exp_1, exp_2, vect_prom)  # promedio de las observaciones iniciales
 df_1=pd.DataFrame(y2_prom,columns=['PROM_EXP'])
 df_1.head()
