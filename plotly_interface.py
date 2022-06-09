@@ -84,10 +84,10 @@ application.layout = dbc.Card([
         dbc.Row(
             [
                 dbc.Col(
-                    app_sidebar, sm=2, style=nav.NAV_BAR_STYLE
+                    app_sidebar, md=2, style=nav.NAV_BAR_STYLE
                 ),
 
-                dbc.Col([app_nav, app_cont_1, app_cont_2,app_cont_3], style=nav.NAV_BAR_STYLE, sm=10),
+                dbc.Col([app_nav, app_cont_1, app_cont_2,app_cont_3], style=nav.NAV_BAR_STYLE, md=10),
 
             ]
         ),

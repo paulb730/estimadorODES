@@ -73,7 +73,7 @@
     color:#393e46;
     font-size:12px;
     font-weight: 600;
-    width: 220px;
+    width: 100%;
     height:auto;
     background-color:#f96d00 !important ;
 
@@ -111,7 +111,12 @@ border-color:  #f96d00 !important;
 
 }
 
+.nav_algo{
 
+    padding-top: 15px ;
+
+
+}
 
 @media(min-width:1200px){
 .container{

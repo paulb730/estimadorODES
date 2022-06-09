@@ -3,7 +3,7 @@ import numpy as np
 
 titulo_text = ["Modeling Data", "Modeling Description", "Algoritmo"]
 
-algoritmos = ["algoritmos","PSO", "AP Monitor", "Mínimos cuadrados", "Gauss-Newton", "Algoritmos Genéticos"]
+algoritmos = ["PSO", "AP Monitor", "Mínimos cuadrados", "Gauss-Newton", "Algoritmos Genéticos"]
 
 id_botones=["pso","ap","min","ganew","ga"]
 

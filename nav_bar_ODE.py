@@ -15,6 +15,7 @@ SIDEBAR_STYLE = {
     "left": "0",
     "bottom": "0",
     "color": "#ffff",
+    "width": "35vh",
     "fontFamily": "Times New Roman, Times, serif"
 }
 COLORS_STYLE = {
@@ -82,7 +83,7 @@ def nav_bar():
 
 def side_bar(id):
     return html.Div(
-        [   html.H3("Aplicaciones"),
+        [   html.H4("Aplicaciones"),
             html.Hr(),
 
             dbc.Nav(
@@ -94,17 +95,16 @@ def side_bar(id):
                 ],
                 vertical=True
             ),
-
-            html.H3("Funciones", className="display-6"),
             html.Hr(),
-            html.P("Algoritmos"),
+            html.H4("Algoritmos"),
             dbc.Nav(
                 [
-                    dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list',class_name="btn-secondary"),
+                    dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list'),
 
                 ],
                 vertical="md",
                 pills=True,
+                className="nav_algo"
             ),
 
         ],
