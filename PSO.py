@@ -90,6 +90,7 @@ class Partical:
         self.initV(min_v, max_v)  # Velocidad inicial de la particula
 
         self.fitness = fitness
+        #Inicializar la particula en la funcion objetivo
         self.bestFitness = fitness(self.pos)
 
     def _updateFit(self):
@@ -114,8 +115,8 @@ class Partical:
         :param gbest:
         :return:
         """
-        self._v = w * self._v + c1 * np.random.random() * (self.pbest - self.pos) + c2 * np.random.random() * (
-                gbest - self.pos)
+        #Vector de velocidad PSO
+        self._v = w * self._v + c1 * np.random.random() * (self.pbest - self.pos) + c2 * np.random.random() * (gbest - self.pos)
 
         for i in range(self.dim):
             self._v[i] = min(self._v[i], self.max_v[i])

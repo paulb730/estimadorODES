@@ -8,14 +8,15 @@ import constantes as const
 # Derechos Reservados
 
 SIDEBAR_STYLE = {
-    "position": "fixed",
+    "position":"sticky",
     "backgroundColor": "#222831",
     "padding": "1rem 1rem",
     "top": "0",
     "left": "0",
+    "right":"0",
     "bottom": "0",
+
     "color": "#ffff",
-    "width": "35vh",
     "fontFamily": "Times New Roman, Times, serif"
 }
 COLORS_STYLE = {
@@ -39,6 +40,11 @@ CONTENT_STYLE = {
     "padding": "1rem 1rem",
     "fontFamily": "Times New Roman, Times, serif"
 }
+
+CARD_STYLE = {
+
+
+}
 NAV_BAR_STYLE = {
 
     "top": "0",
@@ -49,8 +55,8 @@ NAV_BAR_STYLE = {
 
 }
 
-names = [["Casos de Estudio", 0], ["Modelo Enzimático", 1], ["Dinámica Hepatitis ", 2], ["Lotka Volterra", 3],
-         ["", 4], ["Dinámica HIV", 5], ["Modelo de Cinética Química", 6]]
+names = [["Casos de Estudio", 0], ["Modelo Enzimático", 1], ["Dinámica Hepatitis C (5% ruido) ", 2], ["Benchmark", 3],
+         ["Lotka Volterra", 4], ["Dinámica HIV", 5], ["Modelo de Cinética Química", 6]]
 
 names = np.array(names)
 
@@ -73,7 +79,7 @@ def dropdown(id):
 def nav_bar():
     return dbc.Container(
         [
-            dbc.Col(html.H2("Estimador de  Parámetros de  EDO's "), id="tit", class_name="order-12 p-2",
+            dbc.Col(html.H2("Estimador de  Parámetros en EDOs", id='main_tit'), id="tit", class_name="order-12 p-2",
                     style=FONT_COLOR, align="center")
 
         ],
@@ -82,31 +88,53 @@ def nav_bar():
 
 
 def side_bar(id):
-    return html.Div(
-        [   html.H4("Aplicaciones"),
-            html.Hr(),
+    return dbc.Nav(
+        [html.H4("Aplicaciones"),
+         html.Hr(),
 
-            dbc.Nav(
-                [
-                    dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash ")),
-                    html.Br(),
-                    dbc.NavLink(dbc.Button("Funcionamiento PSO", className="button-link " ,color="primary",href="/bench"))
+         dbc.Nav(
+             [
+                 dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash ")),
+                 html.Hr(),
+                 dbc.NavLink(
+                     dbc.Button("Visualización PSO", className="button-link ", id='but_viewpso', color="primary",
+                                n_clicks=0, )),
 
-                ],
-                vertical=True
-            ),
-            html.Hr(),
-            html.H4("Algoritmos"),
-            dbc.Nav(
-                [
-                    dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list'),
+             ],
+             vertical=True
+         ),
+         html.Hr(),
+         html.H4("Algoritmos"),
+         dbc.Nav(
+             [
+                 dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list'),
 
-                ],
-                vertical="md",
-                pills=True,
-                className="nav_algo"
-            ),
+             ],
+             vertical="md",
+             pills=True,
+             className="nav_algo"
 
-        ],
+         ),
+
+         dbc.Nav(
+
+             [
+                 html.Hr(),
+                 dcc.Textarea(
+                     id='textarea_console',
+                     value="",
+                     style={'width': '100%', 'height':'100vh','background': '#222831 ', 'color': "#fff", 'font-size': '14px','resize':'none'},
+                 ),
+
+             ],
+             vertical="md",
+             pills=True,
+             className="nav_algo"
+         ),
+
+         ],
         style=SIDEBAR_STYLE,
+        vertical="lg",
+        pills=True,
+
     )
