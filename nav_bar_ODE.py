@@ -7,7 +7,7 @@ import constantes as const
 # Author: Paul Benavides
 # Derechos Reservados
 
-SIDEBAR_STYLE = {
+SIDEBAR_STYLE_1 = {
     "position":"sticky",
     "backgroundColor": "#222831",
     "padding": "1rem 1rem",
@@ -76,45 +76,53 @@ def dropdown(id):
     )
 
 
-def nav_bar():
-    return dbc.Container(
-        [
-            dbc.Col(html.H2("Estimador de  Parámetros en EDOs", id='main_tit'), id="tit", class_name="order-12 p-2",
-                    style=FONT_COLOR, align="center")
+def nav_bar(id):
+    return dbc.Card(
 
-        ],
+        dbc.CardHeader( [
+            dbc.Row([dbc.Col([html.H2("Estimador de  Parámetros en EDOs", id='main_tit')],
+                             class_name="pad_tit"),
+                     dbc.Col([dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash "))],
+                             )],
+                    id="tit",style=FONT_COLOR, align="center"),
+        ])
+       ,class_name="mediatit"
 
     )
 
 
-def side_bar(id):
+def side_bar():
     return dbc.Nav(
-        [html.H4("Aplicaciones"),
-         html.Hr(),
+        [
+
+
+            dbc.Nav(
+                [
+                    html.H4("Algoritmos"),
+                    dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos],
+                                   id='algo_list'),
+
+                ],
+
+                className="nav_algo nav_radio",
+                vertical="sm"
+
+            ),
+
 
          dbc.Nav(
              [
-                 dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash ")),
+
                  html.Hr(),
                  dbc.NavLink(
                      dbc.Button("Visualización PSO", className="button-link ", id='but_viewpso', color="primary",
                                 n_clicks=0, )),
 
              ],
-             vertical=True
+             vertical="sm"
          ),
          html.Hr(),
-         html.H4("Algoritmos"),
-         dbc.Nav(
-             [
-                 dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos], id='algo_list'),
 
-             ],
-             vertical="md",
-             pills=True,
-             className="nav_algo"
-
-         ),
 
          dbc.Nav(
 
@@ -123,18 +131,18 @@ def side_bar(id):
                  dcc.Textarea(
                      id='textarea_console',
                      value="",
-                     style={'width': '100%', 'height':'100vh','background': '#222831 ', 'color': "#fff", 'font-size': '14px','resize':'none'},
+                     className="text_area_1"
                  ),
 
              ],
-             vertical="md",
+             vertical="sm",
              pills=True,
              className="nav_algo"
          ),
 
          ],
-        style=SIDEBAR_STYLE,
-        vertical="lg",
+        class_name="SIDEBAR_STYLE",
+        vertical="sm",
         pills=True,
 
     )

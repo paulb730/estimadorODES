@@ -173,12 +173,9 @@ def GRAFICOS(id):
     return dcc.Graph(
         id=str(id),
         figure={},
-        className='',
+        className='graphstyle',
         clickData=None,
         hoverData=None,
-        style={
-            'width': 'auto', 'height': '63vh'
-        },
         config={
             'staticPlot': False,
             'scrollZoom': True,
@@ -219,12 +216,9 @@ def GRAFICOS_2(id):
     return dcc.Graph(
         id=str(id),
         figure={},
-        className='',
+        className='graphstyle',
         clickData=None,
         hoverData=None,
-        style={
-            'width': 'auto', 'height': '63vh'
-        },
         config={
             'staticPlot': False,
             'scrollZoom': True,
@@ -241,13 +235,10 @@ def GRAFICOS_3(id):
     return dcc.Graph(
         id=str(id),
         figure={},
-        className='',
+        className='graphstyle',
         clickData=None,
         hoverData=None,
-        style={
-            'width': 'auto', 'height': '43vh'
-        },
-        config={
+       config={
             'staticPlot': False,
             'scrollZoom': True,
             'doubleClick': 'reset',

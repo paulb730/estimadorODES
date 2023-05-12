@@ -1,4 +1,5 @@
 import dash
+from dash import html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 import nav_bar_ODE as nav
@@ -21,6 +22,7 @@ import re
 # Derechos Reservados
 
 # Create app
+#NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program
 
 MATHJAX_CDN = '''
 https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/
@@ -45,8 +47,7 @@ application.config.suppress_callback_exceptions = True
 1. Create componenents for the app
 
 """
-# Barra de navegacion
-app_nav = nav.nav_bar()
+
 # Contenido del modelo
 value_change = 0
 value_change_2 = 0
@@ -101,30 +102,36 @@ app_cont_3 = ctif.algoritmo_proceso(value_change_3, graph5)
 
 # ID dropdown
 id = "dpdw"
+
+# Barra de navegacion
+app_nav = nav.nav_bar(id)
 # Barra lateral
 
 
-app_sidebar = nav.side_bar(id)
+app_sidebar = nav.side_bar()
+
 
 """
 2. App layout 
 """
 
-application.layout = dbc.Card([
+application.layout = html.Div([dbc.Row(
+                            [app_nav],
+                     style=nav.NAV_BAR_STYLE
+            ),
 
     dbc.Row(
         [
+
             dbc.Col(
-                [app_sidebar], sm=2, style=nav.NAV_BAR_STYLE
+                [app_sidebar], class_name="col-sm-2", style=nav.NAV_BAR_STYLE
             ),
 
-            dbc.Col([app_nav, app_cont_1, app_cont_2, app_cont_3, estadisticas],
-                    style=nav.NAV_BAR_STYLE, sm=10),
+            dbc.Col([app_cont_1, app_cont_2, app_cont_3, estadisticas],
+                    style=nav.NAV_BAR_STYLE, class_name="col-sm-10"),
 
-        ]
-    ),
-
-], style=nav.NAV_BAR_STYLE, )
+        ],style=nav.NAV_BAR_STYLE
+    ),])
 
 
 
