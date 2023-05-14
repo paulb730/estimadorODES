@@ -134,9 +134,32 @@ application.layout = html.Div([dbc.Row(
     ),])
 
 
+def toggle_text(T:bool,text_1,text_2):
+    if T:
+        return text_1
+    else:
+        return text_2
+
+
+
+@application.callback(
+    Output("alert_algo", "is_open"),
+    [Input("algo_list", "value"),Input(id, "value")],
+    [State("alert_algo", "is_open")],
+)
+def toggle_alert(algo, case,is_open):
+    print("valores",algo,case,is_open)
+    if str(case) =='0' or case is None:
+        print("in")
+        if str(algo)!="0" or algo is not None:
+            is_open=True
+    else:
+        is_open=False
+
+    return is_open
+
 
 # Validar Botones
-
 @application.callback(
     [Output("but_estadis", "disabled"),Output("odeint", "disabled"),Output("algoexe", "disabled")],
     [Input(id,"value"),Input("algo_list","value")]
@@ -148,7 +171,7 @@ def enabled_estadisticas_integracion(case, algo_num):
         is_off_algoexe = True
         return is_off_est, is_off_int, is_off_algoexe
 
-    if not ((case != '0' and case is not None) and (algo_num != '0' and algo_num is not None)):
+    if not ((case != '0' and case is not None) and (str(algo_num) != '0' and algo_num is not None)):
         is_off_est = True
         is_off_int = True
         is_off_algoexe = True
@@ -706,6 +729,50 @@ def toggle_collapse_ALGO(value, is_open_PSO, is_open_NSPSO, is_open_BEE, is_open
     return is_open_PSO, is_open_NSPSO, is_open_BEE, is_open_algo_de, is_open_algo_ga
 
 
+@application.callback(
+    [Output("description_container","is_open"), Output("butmin_1","children")],
+    Input("butmin_1","n_clicks"),
+    State("description_container","is_open")
+
+
+)
+
+
+def collapse_cards(n,is_open):
+
+    if n:
+        return not is_open,toggle_text(is_open,"Max","Min")
+    return is_open,toggle_text(is_open,"Max","Min")
+
+@application.callback(
+    [Output("algocontainer","is_open"), Output("butmin_2","children")],
+    Input("butmin_2","n_clicks"),
+    State("algocontainer","is_open")
+
+
+)
+
+
+def collapse_cards(n,is_open):
+
+    if n:
+        return not is_open,toggle_text(is_open,"Max","Min")
+    return is_open,toggle_text(is_open,"Max","Min")
+
+@application.callback(
+    [Output("datacontainer","is_open"), Output("butmin_0","children")],
+    Input("butmin_0","n_clicks"),
+    State("datacontainer","is_open")
+
+
+)
+
+
+def collapse_cards(n,is_open):
+
+    if n:
+        return not is_open,toggle_text(is_open,"Max","Min")
+    return is_open,toggle_text(is_open,"Max","Min")
 
 
 
@@ -713,15 +780,14 @@ def toggle_collapse_ALGO(value, is_open_PSO, is_open_NSPSO, is_open_BEE, is_open
 
 #Estadisticas
 @application.callback(
-    Output(const.id_estadisticas, "is_open"),
+    [Output(const.id_estadisticas, "is_open"),Output("but_estadis","children")],
     [Input("but_estadis", "n_clicks")],
     [State(const.id_estadisticas, "is_open")],
 )
 def toggle_collapse(n, is_open):
     if n:
-        return not is_open
-    return is_open
-
+        return not is_open,toggle_text(is_open,"Mostrar Estadisticas","Minimizar Estadísticas")
+    return is_open,toggle_text(is_open,"Mostrar Estadisticas","Minimizar Estadísticas")
 
 
 
@@ -884,6 +950,72 @@ def on_data(ts, n_clicks, data, case, algonum):
 
 # This call registers the callbacks on the application.
 cc.register(application)
+
+application.clientside_callback(
+    """
+       function(clicks, elemid) {
+        document.getElementById(elemid).scrollIntoView({
+          behavior: 'auto',
+          alignToTop: true,
+          block: 'start', 
+          inline: 'start',
+        });
+    }
+    """,
+    Output('garbage-output-0', 'children'),
+    Input('butmin_1f', 'n_clicks'),
+    [State('col_desc', 'id')]
+)
+application.clientside_callback(
+    """
+       function(clicks, elemid) {
+        document.getElementById(elemid).scrollIntoView({
+          behavior: 'auto',
+          alignToTop: true,
+          block: 'start', 
+          inline: 'start',
+        });
+    }
+    """,
+    Output('garbage-output-2', 'children'),
+    Input('butmin_0f', 'n_clicks'),
+    [State('colu_dat', 'id')]
+)
+application.clientside_callback(
+    """
+       function(clicks, elemid) {
+        document.getElementById(elemid).scrollIntoView({
+          behavior: 'auto',
+          alignToTop: true ,
+          block: 'start', 
+          inline: 'start',
+        });
+    }
+    """,
+    Output('garbage-output-1', 'children'),
+    Input('butmin_2f', 'n_clicks'),
+    [State('col_opt', 'id')]
+)
+application.clientside_callback(
+    """
+       function(clicks, elemid) {
+        document.getElementById(elemid).scrollIntoView({
+          behavior: 'auto',
+          alignToTop: true,
+          block: 'start', 
+          inline: 'start',
+        });
+    }
+    """,
+    Output('garbage-output-3', 'children'),
+    Input('butmin_3f', 'n_clicks'),
+    [State('col_esta', 'id')]
+)
+
+
+
+
+
 
 if __name__ == '__main__':
     application.run_server(debug=True)

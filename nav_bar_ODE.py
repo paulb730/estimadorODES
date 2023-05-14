@@ -80,9 +80,14 @@ def nav_bar(id):
     return dbc.Card(
 
         dbc.CardHeader( [
+
+            html.Div(id="garbage-output-0"),
+            html.Div(id="garbage-output-1"),
+            html.Div(id="garbage-output-2"),
+            html.Div(id="garbage-output-3"),
             dbc.Row([dbc.Col([html.H2("Estimador de  Parámetros en EDOs", id='main_tit')],
-                             class_name="pad_tit"),
-                     dbc.Col([dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash "))],
+                             class_name="pad_tit col-sm-6"),
+                     dbc.Col([dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash col-sm-6"))],
                              )],
                     id="tit",style=FONT_COLOR, align="center"),
         ])
@@ -101,16 +106,37 @@ def side_bar():
                     html.H4("Algoritmos"),
                     dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos],
                                    id='algo_list'),
+                    dbc.Alert(
+                        [
+                            "Elije un caso de estudio",
+                            html.A("link ejemplo", href="#", className="alert-link"),
+                        ],
+                        id="alert_algo",
+                        color="danger",
+                        is_open=False,
+                        dismissable=True,
+                    )
+
 
                 ],
 
                 className="nav_algo nav_radio",
-                vertical="sm"
+                vertical="sm",
+                id="navradioid"
 
             ),
+            html.Div([ dbc.Col(dbc.Button("Data", class_name="button-link_1 mt-2 col-sm-6", id="butmin_0f"),
+                    ),
+            dbc.Col(dbc.Button("Descripcion", class_name="button-link_1 mt-2 col-sm-6", id="butmin_1f"),
+                    ),
+            dbc.Col(dbc.Button("Optimizacion", class_name="button-link_1 mt-2 col-sm-6 ", id="butmin_2f"),
+                    ),
 
+            dbc.Col(dbc.Button("Estadisticas", class_name="button-link_1 mt-2 col-sm-6", id="butmin_3f"),
+                    )],id="navbut")
 
-         dbc.Nav(
+            ,
+        dbc.Nav(
              [
 
                  html.Hr(),

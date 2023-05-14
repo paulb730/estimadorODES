@@ -63,17 +63,18 @@
     height:auto;
 
 }
+.button-link_1{
 
-.drop-dash{
-    display: inline-block;
-    color:#393e46;
-    font-size:12px;
+    color:#f2f2f2;
+    background:rgb(57, 62, 70) !important;
+    font-size:10px;
     font-weight: 600;
-    width: 100%;
+    width: 85px;
     height:auto;
-    background-color:#f96d00 !important ;
 
 }
+
+
 
 .Select-control{
      background-color:#f96d00 !important ;
@@ -153,6 +154,7 @@ border-color:  #f96d00 !important;
 .pad_tit{
     padding:8px;
     margin-left:17px;
+    text-align: center;
 
 }
 
@@ -164,20 +166,55 @@ border-color:  #f96d00 !important;
 
 flex: 0 0 100% !important;
 }
+.button-link{
 
-#algo_list{
+    color:#f2f2f2;
+    font-size:18px;
+    font-weight: 600;
+    width: 100%;
+    height:auto;
+
+}
+
+#navbut{
 display:flex;
 flex-direction:row;
 justify-content:space-around;
+flex-wrap:wrap;
+
+
+}
+.drop-dash{
+    display: inline-block;
+    color:#393e46;
+    font-size:18px;
+    font-weight: 700;
+    width: 100%;
+    height:auto;
+    background-color:#f96d00 !important ;
+
+}
+
+.col-sm-6{
+flex: 0 0 100% !important;
+}
+
+
+#algo_list{
+display:flex;
+flex-direction:column;
+justify-content:space-around;
 width:100%;
 padding:0;
-font-size:15px;
+font-size:24px;
+align-items:center;
+flex-wrap:wrap;
 
 }
 
 .graphstyle{
     width:auto;
-    height:33vh;
+    height:100%;
 
 }
 .col-sm-10{
@@ -197,24 +234,46 @@ flex: 0 0 100% !important;
   height:10%;
   background: #222831;
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
 
 }
-.nav_radio{
-flex-wrap:wrap;
 
-
-}
 
 }
 @media  (min-width: 1024px){
 .col-sm-2{
-flex: 0 0 19% !important;
+flex: 0 0 13% !important;
 }
-.nav_radio{
+#navbut{
+display:flex;
+flex-direction:column;
+justify-content:space-around;
 flex-wrap:nowrap;
+}
+.button-link{
+
+    color:#f2f2f2;
+    font-size:12px;
+    font-weight: 600;
+    width: 100%;
+    height:auto;
 
 }
+.col-sm-6{
+flex: 0 0 50% !important;
+}
+.drop-dash{
+    display: inline-block;
+    color:#393e46;
+    font-size:12px;
+    font-weight: 700;
+    width: 100%;
+    height:auto;
+    background-color:#f96d00 !important ;
+
+}
+
+
 .graphstyle{
     width:auto;
     height:63vh;
@@ -226,6 +285,8 @@ flex-direction:column;
 flex-wrap:nowrap;
 width:100%;
 font-size:13px;
+justify-content: space-around;
+align-items: flex-start;
 
 
 }
@@ -238,7 +299,7 @@ flex: 0 0 81% !important;
 
 .text_area_1{
   width: 100%;
-  height:100vh;
+  height:100%;
   background: #222831;
   color: #fff;
   font-size: 14px;

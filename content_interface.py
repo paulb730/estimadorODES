@@ -39,17 +39,23 @@ def model_data(case, graph):
             [dbc.Card([
                 dbc.Container([
                     dbc.Row([
-                        dbc.Col([html.H1(const.titulo_dict["t0"]),
+                        dbc.Col(html.H1(const.titulo_dict["t0"]), class_name="col-sm-9 mt-2"),
+                        dbc.Col(dbc.Button("Max", class_name="button-link_1 mt-2", id="butmin_0"), class_name="col-sm-3"),
+                        collapse_component(dbc.Col([
+
+
+
 
                                  dbc.Row([
                                      dbc.Col(html.Div(casos), sm=3), dbc.Col(html.Div(graficos), sm=9)
-                                 ])]),
+                                 ])]),"datacontainer"),
+
                     ])
                 ], fluid=True, class_name="container")
             ])
             ]
         )
-    ], style=nav.CONTENT_STYLE)
+    ], style=nav.CONTENT_STYLE,id="colu_dat")
 
 
 def model_description(case, graph):
@@ -61,7 +67,10 @@ def model_description(case, graph):
                 dbc.Card([
                     dbc.Container([
                         dbc.Row([
-                            dbc.Col([html.H1(const.titulo_dict["t1"]),
+                            dbc.Col(html.H1(const.titulo_dict["t1"]), class_name="col-sm-9 mt-2"),
+                            dbc.Col(dbc.Button("Max",class_name="button-link_1 mt-2",id="butmin_1"), class_name="col-sm-3"),
+
+                            collapse_component(dbc.Col([
                                      dbc.Row([
                                          dbc.Col(html.Div(
                                              [
@@ -92,7 +101,9 @@ def model_description(case, graph):
 
                                          ), sm=12, style={"padding-top": 50})
 
-                                     ])]),
+                                     ])]),"description_container"),
+
+
 
                         ])
 
@@ -104,7 +115,7 @@ def model_description(case, graph):
 
         )
 
-    ], style=nav.CONTENT_STYLE)
+    ], style=nav.CONTENT_STYLE,id="col_desc")
 
 
 def ALGO_edit_PSO():
@@ -397,12 +408,16 @@ def algoritmo_proceso(case, graph_2):
     parametros = colldat.parametros(case)
 
     return dbc.Col([
+
         dbc.Row(
             [
                 dbc.Card([
                     dbc.Container([
                         dbc.Row([
-                            dbc.Col([html.H1(const.titulo_dict["t2"]),
+                            dbc.Col(html.H1(const.titulo_dict["t2"]), class_name="col-sm-9 mt-2"),
+                            dbc.Col(dbc.Button("Max", class_name="button-link_1 mt-2", id="butmin_2"),
+                                    class_name="col-sm-3"),
+                            collapse_component(dbc.Col([
                                      dbc.Row([
 
                                          # EDITABLES
@@ -438,7 +453,7 @@ def algoritmo_proceso(case, graph_2):
 
                                          dbc.Col(html.Div(id="test_time"))
 
-                                     ])])])
+                                     ])]),"algocontainer")])
 
                     ], fluid=True, class_name="container")
 
@@ -448,7 +463,7 @@ def algoritmo_proceso(case, graph_2):
 
         )
 
-    ], style=nav.CONTENT_STYLE)
+    ], style=nav.CONTENT_STYLE,id="col_opt")
 
 
 def field_data_estadisticas():
@@ -478,7 +493,7 @@ def estadisticas(table_cond_algo,
                                 dbc.Row([
                                     # Abrir panel de estadísticas
                                     dbc.NavLink(
-                                        dbc.Button("Estadísticas ", className="button-link ", id="but_estadis",
+                                        dbc.Button("Mostrar Estadísticas", className="button-link ", id="but_estadis",
                                                    color="primary", n_clicks=0, disabled=True)),
 
                                 ])], sm=12),
@@ -522,7 +537,7 @@ def estadisticas(table_cond_algo,
 
         )
 
-    ], style=nav.CONTENT_STYLE)
+    ], style=nav.CONTENT_STYLE,id="col_esta")
 
 
 
