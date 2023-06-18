@@ -15,7 +15,6 @@ SIDEBAR_STYLE_1 = {
     "left": "0",
     "right":"0",
     "bottom": "0",
-
     "color": "#ffff",
     "fontFamily": "Times New Roman, Times, serif"
 }
@@ -31,9 +30,7 @@ NAV_LINKS_STYLE = {
     "fontWeight": "500",
     "font-size": "18px",
 }
-FONT_STYLE = {
 
-}
 # padding for the page content
 CONTENT_STYLE = {
 
@@ -41,10 +38,7 @@ CONTENT_STYLE = {
     "fontFamily": "Times New Roman, Times, serif"
 }
 
-CARD_STYLE = {
 
-
-}
 NAV_BAR_STYLE = {
 
     "top": "0",

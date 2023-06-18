@@ -24,11 +24,13 @@ def slider_data(items):
     )
 
 
-def collapse_component(component, id):
+def collapse_component(component, id,on_off):
     return dbc.Collapse(
         dbc.Container([component],fluid=True, class_name="container"),
         id=id,
-        is_open=False, )
+        is_open=on_off, )
+
+
 
 
 def model_data(case, graph):
@@ -40,15 +42,11 @@ def model_data(case, graph):
                 dbc.Container([
                     dbc.Row([
                         dbc.Col(html.H1(const.titulo_dict["t0"]), class_name="col-sm-9 mt-2"),
-                        dbc.Col(dbc.Button("Max", class_name="button-link_1 mt-2", id="butmin_0"), class_name="col-sm-3"),
+                        dbc.Col(dbc.Button("Min", class_name="button-link_1 mt-2", id="butmin_0"), class_name="col-sm-3"),
                         collapse_component(dbc.Col([
-
-
-
-
                                  dbc.Row([
                                      dbc.Col(html.Div(casos), sm=3), dbc.Col(html.Div(graficos), sm=9)
-                                 ])]),"datacontainer"),
+                                 ])]),"datacontainer",True),
 
                     ])
                 ], fluid=True, class_name="container")
@@ -68,7 +66,7 @@ def model_description(case, graph):
                     dbc.Container([
                         dbc.Row([
                             dbc.Col(html.H1(const.titulo_dict["t1"]), class_name="col-sm-9 mt-2"),
-                            dbc.Col(dbc.Button("Max",class_name="button-link_1 mt-2",id="butmin_1"), class_name="col-sm-3"),
+                            dbc.Col(dbc.Button("Min",class_name="button-link_1 mt-2",id="butmin_1"), class_name="col-sm-3"),
 
                             collapse_component(dbc.Col([
                                      dbc.Row([
@@ -95,13 +93,13 @@ def model_description(case, graph):
                                                                         id="odeint", n_clicks=0,disabled=True))]), sm=12,
                                              style={"padding-right": 0, "padding-left": 0}),
                                          dbc.Col(html.Div([
-                                             dbc.Spinner(graficos_2, show_initially=True)
+                                             dbc.Spinner(graficos_2, show_initially=True,fullscreen=True)
 
                                          ]
 
                                          ), sm=12, style={"padding-top": 50})
 
-                                     ])]),"description_container"),
+                                     ])]),"description_container",True),
 
 
 
@@ -167,7 +165,7 @@ def ALGO_edit_PSO():
                           max=500, placeholder="POP")
 
             ], sm=6)])
-    ]), "PSO_edit_container")
+    ]), "PSO_edit_container",False)
 
 
 def ALGO_EDIT_MC():
@@ -213,7 +211,7 @@ def ALGO_EDIT_MC():
 
             ]
             #"ALGO_edit_container"
-        ), "MC_edit_container")
+        ), "MC_edit_container",False)
 
 
 def ALGO_EDIT_BEE():
@@ -271,7 +269,7 @@ def ALGO_EDIT_BEE():
             ]),
 
         ])
-        , "BEE_edit_container")
+        , "BEE_edit_container",False)
 
 def ALGO_EDIT_1():
     return collapse_component(
@@ -332,7 +330,7 @@ def ALGO_EDIT_1():
 
                 ])
             ]
-        ), "DEALGO_edit_container")
+        ), "DEALGO_edit_container",False)
 
 
 def ALGO_EDIT_2():
@@ -394,7 +392,7 @@ def ALGO_EDIT_2():
 
                 ])
             ]
-        ), "GAALGO_edit_container")
+        ), "GAALGO_edit_container",False)
 
 
 def edit_table_FORM(component: list, id):
@@ -415,7 +413,7 @@ def algoritmo_proceso(case, graph_2):
                     dbc.Container([
                         dbc.Row([
                             dbc.Col(html.H1(const.titulo_dict["t2"]), class_name="col-sm-9 mt-2"),
-                            dbc.Col(dbc.Button("Max", class_name="button-link_1 mt-2", id="butmin_2"),
+                            dbc.Col(dbc.Button("Min", class_name="button-link_1 mt-2", id="butmin_2"),
                                     class_name="col-sm-3"),
                             collapse_component(dbc.Col([
                                      dbc.Row([
@@ -445,15 +443,22 @@ def algoritmo_proceso(case, graph_2):
                                          # Grafico
                                          dcc.Loading(
                                              children=[
-                                                 graficos_5], id="load"
+                                                 graficos_5], id="load",fullscreen=True,debug=True, type='graph'
 
                                          ),
 
+
+
+
                                          dcc.Store(id='memory_storage_param_table'),
+                                         dcc.Store(id='memory_storage_param_table_1'),
+                                         dcc.Store(id='memory_storage_param_table_2'),
+                                         dcc.Store(id='memory_storage_param_table_3'),
+                                         dcc.Store(id='memory_storage_param_table_4'),
 
                                          dbc.Col(html.Div(id="test_time"))
 
-                                     ])]),"algocontainer")])
+                                     ])]),"algocontainer",True)])
 
                     ], fluid=True, class_name="container")
 
@@ -525,7 +530,7 @@ def estadisticas(table_cond_algo,
 
                             ], sm=12)
 
-                        ]), ]), const.id_estadisticas),
+                        ]), ]), const.id_estadisticas,True),
 
                         html.Br(),
 

@@ -33,14 +33,6 @@ def PSO_test(objective_function, pop, gen, xmin, xmax, c1, c2, w):
     return [fitlist, vectthetha]
 
 
-def minimize_function(objetivefunction,paramguess,gen,tol_param,tol_func,method):
-    g=minimize(objetivefunction,paramguess,method=str(method),options={'xtol':tol_param,'ftol':tol_func,
-                              'maxiter':int(gen),'disp': True})
 
-    return g
-
-def LSQ(objetivefunction,paramguess,gen:int,ftol:float):
-    g=least_squares(objetivefunction,paramguess,max_nfev=gen,gtol=ftol)
-    return g
 
 

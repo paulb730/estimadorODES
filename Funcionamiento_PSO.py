@@ -6,11 +6,19 @@ import numpy as np
 class Parameter:
     def __init__(self, x_min, x_max):
         """
-        Constructor for the HimmelblauOptimization class.
+
+        :param x_min: Umbral mínimo de búsqueda
+        :param x_max: Umbral máximo de búsqueda
+        Constructor class Parameter
         """
+
         self.x_min = x_min
         self.x_max = x_max
     def get_param(self):
+        """
+
+        :return: Vector que limita el espacio de búsqueda
+        """
         return (self.x_min,self.x_max)
 
 class Modelos_objective:
@@ -105,7 +113,7 @@ def init_algorithm_pso(ymodel, ymeas, lowerbounds, upperbounds, gen: int, pop, c
     return swarm.champion_x,swarm.champion_f,swarm
 
 
-def init_nspso(ymodel, ymeas, lowerbounds, upperbounds,gen:int,pop:int,verbosity,case,switch_obj:bool):
+def init_nspso(ymodel, ymeas, lowerbounds, upperbounds,gen:int,pop:int,verbosity,case):
     thethaVector = []
     gVector = []
     modelo_obj = Modelos_objective(ymodel, ymeas, lowerbounds, upperbounds, case)

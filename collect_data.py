@@ -741,22 +741,22 @@ def objetivo_compare_F(case, method, gen,
     g = np.zeros(10)
     if method == const.algoritmos[1]:
         if case == '1':
-            g = f_pso.init_nspso(ymodel_enzi, get_y_data_1, [0.1, 0.1, 0.1, 0.1], [1, 3, 1, 0.3], gen, pop,1,'1',False)
+            g = f_pso.init_nspso(ymodel_enzi, get_y_data_1, [0.1, 0.1, 0.1, 0.1], [1, 3, 1, 0.3], gen, pop,1,'1')
         if case == '2':
             g = f_pso.init_nspso(ymodel_hepatitis, get_y_data_2, [3e-4, 1.1e-5, 1, 0.1, 1e-2, 4, 8e-5, 900],
-                                  [4e-4, 1.9e-5, 14, 0.4, 2.5e-2, 6, 10e-5, 1100], gen, pop,1,'2',True)
+                                  [4e-4, 1.9e-5, 14, 0.4, 2.5e-2, 6, 10e-5, 1100], gen, pop,1,'2')
         if case == '3':
             g = f_pso.init_nspso(ymodel_benchmark, get_y_data_3, [-50, -9999, -9999, 100],
-                                  [-20, -1000, -1000, 200], gen, pop,1,'1',False)
+                                  [-20, -1000, -1000, 200], gen, pop,1,'1')
         if case == '4':
             g = f_pso.init_nspso(ymodel_lotka, get_y_data_4,
                                   [0.1, -0.7, -0.3, -0.7, 0.5, -0.04, -2, -0.7, 0.1, -0.09, -0.30, -0.9],
-                                  [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen, pop,1,'3',False)
+                                  [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen, pop,1,'3')
         if case == '5':
             g =f_pso.init_nspso(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                  [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop,1,'4',False)
+                                  [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop,1,'4')
         if case == '6':
-            g =f_pso.init_nspso(ymodel_kinetic, get_y_data_6, [-10, -10], [10, 10], gen, pop,1,'5',False)
+            g =f_pso.init_nspso(ymodel_kinetic, get_y_data_6, [-10, -10], [10, 10], gen, pop,1,'5')
 
     if method == const.algoritmos[2]:
         if case == '1':

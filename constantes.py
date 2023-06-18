@@ -29,7 +29,7 @@ super_data_fitness_error_=[["0"]]*len(algoritmos)
 
 super_data_param_name=[["0"]]*len(algoritmos)
 
-super_timing=["0"]*len(algoritmos)
+#super_timing=["0"]*len(algoritmos)
 
 cont_1=0
 cont_2=0
@@ -61,34 +61,14 @@ titulo_dict = {"t0": "Datos del modelo experimentales ",
                "t1": "Descripción del modelo",
                "t2": "Optimización"}
 
-algo_dict = {"t": "Algoritmos",
-             "t0": "PSO",
-             "t1": "AP Monitor",
-             "t2": "Mínimos cuadrados",
-             "t3": "Método Gauss Newton ",
-             "t4": "Algoritmo genético (GA)"
-             }
 
-subtitulo_dict = {
-    "t0": "Data experimental",
-    "t1": "Gráfico de datos (Sin Optimización PSO)",
-    "t2": "Ecuaciones diferenciales",
-    "t3": "Variables",
-    "t4": "Paràmetros",
-    "t5": "Condiciones Iniciales",
-    "t6": "Función Objetivo",
-    "t7": "Fitting Data Process",
-    "t8": "Tabla de Parámetros",
-    "t9": "Valor función objetivo",
-    "t10": "Gráfica Función Objetivo",
-    "t11": "Gráfico Datos Experimentales ",
-    "t12": "Figure Fitting Model with Data"
-}
+
+
 id_estadisticas = "estadisticas"
 
 titulo_PSO_dict = {
     "t0": "Espacio de bùsqueda",
-    "t1": "Partìculas",
+    "t1": "Partìcudasdlas",
     "t2": "Poblaciòn",
     "t3": "Iteraciones",
     "t4": "Constante de aceleracion ",

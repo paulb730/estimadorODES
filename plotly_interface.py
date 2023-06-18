@@ -659,11 +659,6 @@ def algo_proceso(num_clicks, case, algo_num,
 
     return datafram, colldat.Figure_fitted_OPT(input_id, case, algo_num, df_init['z'], dfT1, param_fitted), data_area
 
-
-
-
-
-
 @application.callback(
 
     Output("PSO_edit_container", "is_open"),
@@ -734,22 +729,19 @@ def toggle_collapse_ALGO(value, is_open_PSO, is_open_NSPSO, is_open_BEE, is_open
     Input("butmin_1","n_clicks"),
     State("description_container","is_open")
 
-
 )
 
 
 def collapse_cards(n,is_open):
 
     if n:
-        return not is_open,toggle_text(is_open,"Max","Min")
-    return is_open,toggle_text(is_open,"Max","Min")
+        return not is_open,toggle_text(is_open,"Min","Max")
+    return is_open,toggle_text(is_open,"Min","Max")
 
 @application.callback(
     [Output("algocontainer","is_open"), Output("butmin_2","children")],
     Input("butmin_2","n_clicks"),
     State("algocontainer","is_open")
-
-
 )
 
 
@@ -772,7 +764,7 @@ def collapse_cards(n,is_open):
 
     if n:
         return not is_open,toggle_text(is_open,"Max","Min")
-    return is_open,toggle_text(is_open,"Max","Min")
+    return  is_open,toggle_text(is_open,"Max","Min")
 
 
 
@@ -797,7 +789,7 @@ def toggle_collapse(n, is_open):
 
 cc = CallbackCache(cache=FileSystemCache(cache_dir='cache'), session_check=True, instant_refresh=True)
 
-@cc.cached_callback(
+@application.callback(
     Output("memory_storage_param_table", "data"),
     [Input("parameter_model", "data"), Input("algoexe", "n_clicks"), Input(id, 'value'), Input("algo_list", 'value'), ],
 
@@ -912,7 +904,7 @@ def store_data(data_p, n_clicks, case, value_algo):
            super_vector_param_names
 
 
-@cc.callback(
+@application.callback(
     [Output(gr_est_0, "figure"),Output(gr_est_1,"figure"),Output(gr_est_2,"figure")],
     [Input("memory_storage_param_table", 'modified_timestamp'), Input("algoexe", "n_clicks")],
     [State("memory_storage_param_table", 'data'), State(id, 'value'), State('algo_list', 'value'), ]
@@ -948,6 +940,14 @@ def on_data(ts, n_clicks, data, case, algonum):
            colldat.Figure_estadistics_3(case,algonum,graph_data_2,graph_data_3,graph_data_5,graph_data_4)
 
 
+
+@application.callback(
+    Output("test_time","children"),
+    Input("memory_storage_param_table",'data')
+
+)
+def debugdata(data):
+    return str(data)
 # This call registers the callbacks on the application.
 cc.register(application)
 
