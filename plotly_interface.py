@@ -911,10 +911,7 @@ def store_data(data_p, n_clicks, case, value_algo):
 )
 def on_data(ts, n_clicks, data, case, algonum):
     input_id = dash.callback_context.triggered[0]["prop_id"].split(".")[0]
-    algo_data_0 = ["None"]
-    graph_data_0 = [0]
-    graph_data_1=[0]
-    algo_data_0 = "0"
+
 
     if ts is None or (case is None and algonum is None) or (str(case) == '0' and algonum != None) or (case is None and algonum != None):
         raise PreventUpdate
