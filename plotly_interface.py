@@ -791,12 +791,11 @@ cc = CallbackCache(cache=FileSystemCache(cache_dir='cache'), session_check=True,
 
 @application.callback(
     Output("memory_storage_param_table", "data"),
-    [Input("parameter_model", "data"), Input("algoexe", "n_clicks"), Input(id, 'value'), Input("algo_list", 'value'), ],
-
+    [Input("parameter_model", "data"), Input("algoexe", "n_clicks"), Input(id, 'value') ],
+    [State("algo_list", 'value')]
 )
 def store_data(data_p, n_clicks, case, value_algo):
     time.sleep(1)  # sleep to emulate a database call / a long calculation
-
     PSO = ""
     NS_PSO = ""
     Colonia_Abejas = ""
@@ -819,7 +818,7 @@ def store_data(data_p, n_clicks, case, value_algo):
     else:
         if data_p is not []:
             split_data = data_p
-            if case != '0':
+            if str(case) != '0':
                 if input_id == "algoexe":
                     if split_data[0]['Algoritmo Usado'] == "$$PSO$$":
                         PSO = data_p
@@ -911,8 +910,6 @@ def store_data(data_p, n_clicks, case, value_algo):
 )
 def on_data(ts, n_clicks, data, case, algonum):
     input_id = dash.callback_context.triggered[0]["prop_id"].split(".")[0]
-
-
     if ts is None or (case is None and algonum is None) or (str(case) == '0' and algonum != None) or (case is None and algonum != None):
         raise PreventUpdate
     else:
