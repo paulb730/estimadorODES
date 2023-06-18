@@ -447,9 +447,6 @@ def algoritmo_proceso(case, graph_2):
 
                                          ),
 
-
-
-
                                          dcc.Store(id='memory_storage_param_table'),
                                          dcc.Store(id='memory_storage_param_table_1'),
                                          dcc.Store(id='memory_storage_param_table_2'),

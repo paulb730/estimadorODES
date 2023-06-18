@@ -933,15 +933,17 @@ def on_data(ts, n_clicks, data, case, algonum):
            colldat.Figure_estadistics_2(case,algonum,algo_data_0,graph_data_0,graph_data_1),\
            colldat.Figure_estadistics_3(case,algonum,graph_data_2,graph_data_3,graph_data_5,graph_data_4)
 
-
-
+"""
 @application.callback(
     Output("test_time","children"),
-    Input("memory_storage_param_table",'data')
+    [Input("memory_storage_param_table",'modified_timestamp')],
+    [State("memory_storage_param_table", 'data')]
 
 )
-def debugdata(data):
-    return str(data)
+def debugdata(ts,data,):
+    super_dict={'d_0':data}
+    return str(super_dict)
+"""
 # This call registers the callbacks on the application.
 cc.register(application)
 
