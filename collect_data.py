@@ -31,7 +31,7 @@ model_data = {
 
 model_analytic = ["Variables", "Parametros", "Ecuaciones", "Condiciones Iniciales"]
 
-parametros_titulos = ["Parametros", "Valor Referencial", "ValorEstimado", "Algoritmo Usado", "Error %", "$$ g( θ ) (Parametros Estimados) $$",
+parametros_titulos = ["Parametros", "Valor Referencial", "ValorEstimado", "Algoritmo Usado","", "$$ g( θ ) (Parametros Estimados) $$",
                       "$$ g( θ ) (Parámetros Referenciales) $$"]
 
 parametros_cond_tit=["$$ Algoritmos $$","$$Condiciones$$"]
@@ -476,27 +476,15 @@ def Figure_estadistics_3(case,algo_num,data_2,data_3,data_4,data_5):
         bp3_4 = [re.sub('[!@#$]', '', _) for _ in bp3_4]
         bp3_5 = [re.sub('[!@#$]', '', _)for _ in bp3_5]
 
-        #Errores
-
-        bp4_1 = data_5[0][:]
-        bp4_2 = data_5[1][:]
-        bp4_3 = data_5[2][:]
-        bp4_4 = data_5[3][:]
-        bp4_5 = data_5[4][:]
-
-        bp4_1=[float(re.sub('[!@#$]', '', _)) for _ in bp4_1]
-        bp4_2 = [float(re.sub('[!@#$]', '', _)) for _ in bp4_2]
-        bp4_3 = [float(re.sub('[!@#$]', '', _)) for _ in bp4_3]
-        bp4_4 = [float(re.sub('[!@#$]', '', _)) for _ in bp4_4]
-        bp4_5 = [float(re.sub('[!@#$]', '', _)) for _ in bp4_5]
 
 
 
-        dff_1 = {"param": bp3_1,  "p(estim)": bp2_1, "p(ref)":bp_1,"error":bp4_1}
-        dff_2={"param": bp3_2,  "p(estim)": bp2_2, "p(ref)":bp_2,"error":bp4_2}
-        dff_3={"param": bp3_3,  "p(estim)": bp2_3, "p(ref)":bp_3,"error":bp4_3}
-        dff_4={"param": bp3_4,  "p(estim)": bp2_4, "p(ref)":bp_4,"error":bp4_4}
-        dff_5={"param": bp3_5,  "p(estim)": bp2_5, "p(ref)":bp_5,"error":bp4_5}
+
+        dff_1 = {"param": bp3_1,  "p(estim)": bp2_1, "p(ref)":bp_1}
+        dff_2={"param": bp3_2,  "p(estim)": bp2_2, "p(ref)":bp_2}
+        dff_3={"param": bp3_3,  "p(estim)": bp2_3, "p(ref)":bp_3}
+        dff_4={"param": bp3_4,  "p(estim)": bp2_4, "p(ref)":bp_4}
+        dff_5={"param": bp3_5,  "p(estim)": bp2_5, "p(ref)":bp_5}
 
         fig = go.Figure()
 
@@ -689,14 +677,15 @@ def ymodel_hiv(param):
 def fitness_goal_4(param):
     ymeas = get_y_data_5()
     log_ymodel = np.log10(ymodel_hiv(param)[:, 2])
-    residual = np.sum((log_ymodel - ymeas) ** 2) / len(ymeas)
+    #(1/len(self.y_data()))*np.sum((np.log10(self.y_modelo(thetha)[:,2]) - self.y_data()) ** 2)
+    residual = 1/len(ymeas)*np.sum((log_ymodel - ymeas) ** 2)
     print("residual HIV", residual)
     return residual
 
 
 def objective_function_HIV(gen: float, pop: float, c1: float, c2: float, w: float):
-    objetivo = f_pso.init_algorithm_pso(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                        [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop, c1, c2, w, 1, '4')
+    objetivo = f_pso.init_algorithm_pso(ymodel_hiv, get_y_data_5, [1e1, 0, 1e-7, 0, 1, 10],
+                                        [1e6, 1, 10e-7, 1, 50, 10000], gen, pop, c1, c2, w, 1, '4')
     return objetivo
 
 
@@ -753,8 +742,9 @@ def objetivo_compare_F(case, method, gen,
                                   [0.1, -0.7, -0.3, -0.7, 0.5, -0.04, -2, -0.7, 0.1, -0.09, -0.30, -0.9],
                                   [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen, pop,1,'3')
         if case == '5':
-            g =f_pso.init_nspso(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                  [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop,1,'4')
+            #[1e1, 0, 1e-7, 0, 1, 10], [1e6, 1, 10e-7, 1, 50, 10000]
+            g =f_pso.init_nspso(ymodel_hiv, get_y_data_5, [1e1, 0, 1e-7, 0, 1, 10],
+                                  [1e6, 1, 10e-7, 1, 50, 10000], gen, pop,1,'4')
         if case == '6':
             g =f_pso.init_nspso(ymodel_kinetic, get_y_data_6, [-10, -10], [10, 10], gen, pop,1,'5')
 
@@ -772,8 +762,9 @@ def objetivo_compare_F(case, method, gen,
                                   [0.1, -0.7, -0.3, -0.7, 0.5, -0.04, -2, -0.7, 0.1, -0.09, -0.30, -0.9],
                                   [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen, pop,limit,1,'3')
         if case == '5':
-            g = f_pso.init_bee_colony(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                  [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop,limit,1,'4')
+            # [1e1, 0, 1e-7, 0, 1, 10], [1e6, 1, 10e-7, 1, 50, 10000]
+            g = f_pso.init_bee_colony(ymodel_hiv, get_y_data_5, [1e1, 0, 1e-7, 0, 1, 10],
+                                  [1e6, 1, 10e-7, 1, 50, 10000], gen, pop,limit,1,'4')
         if case == '6':
             g = f_pso.init_bee_colony(ymodel_kinetic, get_y_data_6, [-10, -10], [10, 10], gen, pop,limit,1,'5')
 
@@ -792,8 +783,9 @@ def objetivo_compare_F(case, method, gen,
                                   [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen, pop, f,
                                   cr, '3',100)
         if case == '5':
-            g = f_pso.init_diif_e(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                  [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop, f, cr, '4',100)
+            # [1e1, 0, 1e-7, 0, 1, 10], [1e6, 1, 10e-7, 1, 50, 10000]
+            g = f_pso.init_diif_e(ymodel_hiv, get_y_data_5, [1e1, 0, 1e-7, 0, 1, 10],
+                                  [1e6, 1, 10e-7, 1, 50, 10000], gen, pop, f, cr, '4',100)
         if case == '6':
             g = f_pso.init_diif_e(ymodel_kinetic, get_y_data_6, [-10, -10], [10, 10], gen, pop, f, cr,
                                   '5',100)
@@ -802,6 +794,7 @@ def objetivo_compare_F(case, method, gen,
 
 
 def simple_genetic(case, gen, pop, m, cr):
+    # [1e1, 0, 1e-7, 0, 1, 10], [1e6, 1, 10e-7, 1, 50, 10000]
     if case == '1':
         g = f_pso.init_genetic_algorithm(ymodel_enzi, get_y_data_1, [0.1, 0.1, 0.1, 0.1], [1, 3, 1, 0.3], gen, pop, m,
                                          cr, '1')
@@ -817,8 +810,8 @@ def simple_genetic(case, gen, pop, m, cr):
                                          [0.5, -0.3, -0.1, -0.3, 0.9, -0.01, -1, -0.4, 0.3, -0.03, -0.10, -0.4], gen,
                                          pop, m, cr, '3')
     if case == '5':
-        g = f_pso.init_genetic_algorithm(ymodel_hiv, get_y_data_5, [1e3, 0.1, 1e-7, 0.1, 1, 10],
-                                         [1e6, 1, 3e-7, 1, 10, 2e2], gen, pop, m, cr, '4')
+        g = f_pso.init_genetic_algorithm(ymodel_hiv, get_y_data_5, [1e1, 0, 1e-7, 0, 1, 10],
+                                         [1e6, 1, 10e-7, 1, 50, 10000], gen, pop, m, cr, '4')
     if case == '6':
         g = f_pso.init_genetic_algorithm(ymodel_kinetic, get_y_data_6, [1e-5, 6e-6], [1e-1, 6e-1], gen, pop, m, cr, '5')
 

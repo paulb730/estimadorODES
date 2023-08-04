@@ -159,7 +159,7 @@ def toggle_alert(algo, case,is_open):
     return is_open
 
 
-# Validar Botones
+
 @application.callback(
     [Output("but_estadis", "disabled"),Output("odeint", "disabled"),Output("algoexe", "disabled")],
     [Input(id,"value"),Input("algo_list","value")]
@@ -450,8 +450,8 @@ def algo_proceso(num_clicks, case, algo_num,
 
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = 100 * (np.abs(param_fitted[i] - df_init['thetha'][i]) / np.abs(df_init['thetha'][i]))
-                        datafram[i]['Error %'] = "$$" + str(round(error, 3)) + "$$"
+                        error = ""
+                        datafram[i][""] = "$$" + error+ "$$"
 
                 if case == '2':
 
@@ -468,8 +468,8 @@ def algo_proceso(num_clicks, case, algo_num,
                     data_area = str(swarm)
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = (np.abs(param_fitted[i] - df_init['thetha'][i]) / np.abs(df_init['thetha'][i])) * 100
-                        datafram[i]['Error %'] = "$$" + str(round(error, 3)) + "$$"
+                        error =""
+                        datafram[i][""] = "$$" +error + "$$"
 
                 if case == '3':
 
@@ -486,8 +486,8 @@ def algo_proceso(num_clicks, case, algo_num,
                     data_area = str(swarm)
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = (np.abs(param_fitted[i] - df_init['thetha'][i]) / np.abs(df_init['thetha'][i])) * 100
-                        datafram[i]['Error %'] = "$$" + str(round(error, 3)) + "$$"
+                        error = ""
+                        datafram[i][""] = "$$" + error+ "$$"
 
                 if case == '4':
 
@@ -504,8 +504,8 @@ def algo_proceso(num_clicks, case, algo_num,
                     data_area = str(swarm)
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = (np.abs(param_fitted[i] - df_init['thetha'][i]) / np.abs(df_init['thetha'][i])) * 100
-                        datafram[i]['Error %'] = "$$" + str(round(error, 3)) + "$$"
+                        error = ""
+                        datafram[i][""] = "$$" + error + "$$"
                 if case == '5':
 
                     dfT1 = df['time']
@@ -521,8 +521,8 @@ def algo_proceso(num_clicks, case, algo_num,
                     data_area = str(swarm)
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = (np.abs(param_fitted[i] - df_init['thetha'][i]) / np.abs(df_init['thetha'][i])) * 100
-                        datafram[i]['Error %'] = "$$" + str(round(error, 3)) +  "$$"
+                        error = ""
+                        datafram[i][""] = "$$" + error +  "$$"
 
                 if case == '6':
                     dfT1 = df['t']
@@ -539,8 +539,8 @@ def algo_proceso(num_clicks, case, algo_num,
 
                     for i in range(len(datafram)):
                         datafram[i]['ValorEstimado'] = "$$" + str(param_fitted[i]) + "$$"
-                        error = 100 * (np.abs(param_fitted[i] - df_init['thetha'][i]) / df_init['thetha'][i])
-                        datafram[i]['Error %'] = "$$" + str(error) +  "$$"
+                        error = ""
+                        datafram[i][""] = "$$" + error +  "$$"
 
             if algo_num == const.algoritmos[1]:
                 best_param, gbest, swarm = colldat.objetivo_compare_F(case, const.algoritmos[1], gen_NS,
