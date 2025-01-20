@@ -22,13 +22,13 @@ from src import odes_solver as ODE_sol
 
 model_data = {
     0: px.data.iris(),
-    1: pd.read_csv('src/csv/enzimatic_model.csv', sep=";", usecols=['t', 'y1']),
-    2: pd.read_csv('src/csv/hepatitis.csv', sep=';', usecols=['tiempo', 'Hs', 'He', 'V', 'T']),
-    3: pd.read_csv('src/csv/benchmark.csv', sep=";", usecols=['t_data', 'x_data']),
-    4: pd.read_csv('src/csv/lotka_volterra_model.csv', sep=";",
+    1: pd.read_csv('csv/enzimatic_model.csv', sep=";", usecols=['t', 'y1']),
+    2: pd.read_csv('csv/hepatitis.csv', sep=';', usecols=['tiempo', 'Hs', 'He', 'V', 'T']),
+    3: pd.read_csv('csv/benchmark.csv', sep=";", usecols=['t_data', 'x_data']),
+    4: pd.read_csv('csv/lotka_volterra_model.csv', sep=";",
                    usecols=['period', 't', 'competidor x', 'competidor y', 'competidor z']),
-    5: pd.read_csv('src/csv/hiv.csv', sep=";", usecols=['time', 'lv']),
-    6: pd.read_csv('src/csv/kinetic_chemistry_model.csv', sep=";", usecols=['t', 'exp_1', 'exp_2', 'vectProm'])
+    5: pd.read_csv('csv/hiv.csv', sep=";", usecols=['time', 'lv']),
+    6: pd.read_csv('csv/kinetic_chemistry_model.csv', sep=";", usecols=['t', 'exp_1', 'exp_2', 'vectProm'])
 
 }
 
