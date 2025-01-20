@@ -56,8 +56,6 @@ class PSO:
                     self.gbest = part.getPbest()
             self.fitness_list.append(self.gbest)
         return self.fitness_list, self.gbest
-
-
 class Partical:
 
     def __init__(self, x_min, x_max, max_v, min_v, fitness):

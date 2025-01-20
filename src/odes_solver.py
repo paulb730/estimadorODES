@@ -1,5 +1,8 @@
 from scipy.integrate import odeint,solve_ivp
-import PSO as pso
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import PSO as pso
 from scipy.optimize import minimize,least_squares
 
 # Author: Paul Benavides

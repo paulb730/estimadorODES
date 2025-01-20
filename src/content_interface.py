@@ -1,15 +1,18 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-import constantes as const
-import nav_bar_ODE as nav
-import collect_data as colldat
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import constantes as const
+from src import nav_bar_ODE as nav
+from src import collect_data as colldat
 
 # Author: Paul Benavides
 # Derechos Reservados
 
 CENTER = {
     "text-align": "center",
-    "font-weight": "800"
+    "font-weight": "100"
 
 }
 
@@ -41,7 +44,7 @@ def model_data(case, graph):
             [dbc.Card([
                 dbc.Container([
                     dbc.Row([
-                        dbc.Col(html.H1(const.titulo_dict["t0"]), class_name="col-sm-9 mt-2"),
+                        dbc.Col(html.H6(const.titulo_dict["t0"]), class_name="col-sm-9 mt-2"),
                         dbc.Col(dbc.Button("Min", class_name="button-link_1 mt-2", id="butmin_0"), class_name="col-sm-3"),
                         collapse_component(dbc.Col([
                                  dbc.Row([
@@ -65,7 +68,7 @@ def model_description(case, graph):
                 dbc.Card([
                     dbc.Container([
                         dbc.Row([
-                            dbc.Col(html.H1(const.titulo_dict["t1"]), class_name="col-sm-9 mt-2"),
+                            dbc.Col(html.H6(const.titulo_dict["t1"]), class_name="col-sm-9 mt-2"),
                             dbc.Col(dbc.Button("Min",class_name="button-link_1 mt-2",id="butmin_1"), class_name="col-sm-3"),
 
                             collapse_component(dbc.Col([
@@ -80,7 +83,7 @@ def model_description(case, graph):
 
                                          ), sm=12),
 
-                                         dbc.Col(html.H5("Edición de parámetros")),
+                                         dbc.Col(html.H6("Edición de parámetros")),
                                          html.Hr(),
                                          dbc.Col(dbc.Row(html.Div(children=table_inputs, id='param_div', style={})),
                                                  sm=12),
@@ -412,7 +415,7 @@ def algoritmo_proceso(case, graph_2):
                 dbc.Card([
                     dbc.Container([
                         dbc.Row([
-                            dbc.Col(html.H1(const.titulo_dict["t2"]), class_name="col-sm-9 mt-2"),
+                            dbc.Col(html.H6(const.titulo_dict["t2"]), class_name="col-sm-9 mt-2"),
                             dbc.Col(dbc.Button("Min", class_name="button-link_1 mt-2", id="butmin_2"),
                                     class_name="col-sm-3"),
                             collapse_component(dbc.Col([

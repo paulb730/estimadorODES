@@ -2,7 +2,10 @@ import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
 import numpy as np
-import constantes as const
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import constantes as const
 
 # Author: Paul Benavides
 # Derechos Reservados
@@ -16,7 +19,8 @@ SIDEBAR_STYLE_1 = {
     "right":"0",
     "bottom": "0",
     "color": "#ffff",
-    "fontFamily": "Times New Roman, Times, serif"
+    "fontFamily": "Kanit, serif",
+    "fontWeight": "100",
 }
 COLORS_STYLE = {
     "backgroundColor": "#222831"
@@ -27,7 +31,7 @@ FONT_COLOR = {
 }
 NAV_LINKS_STYLE = {
     "color": "#ffff",
-    "fontWeight": "500",
+    "fontWeight": "100",
     "font-size": "18px",
 }
 
@@ -35,7 +39,8 @@ NAV_LINKS_STYLE = {
 CONTENT_STYLE = {
 
     "padding": "1rem 1rem",
-    "fontFamily": "Times New Roman, Times, serif"
+    "fontFamily": "Kanit, serif",
+    "fontWeight": "100",
 }
 
 
@@ -45,7 +50,8 @@ NAV_BAR_STYLE = {
     "left": "0",
     "bottom": "0",
     "backgroundColor": "#393e46 ",
-    "fontFamily": "Times New Roman, Times, serif"
+    "fontFamily": "Kanit, serif",
+    "fontWeight": "100",
 
 }
 
@@ -79,7 +85,7 @@ def nav_bar(id):
             html.Div(id="garbage-output-1"),
             html.Div(id="garbage-output-2"),
             html.Div(id="garbage-output-3"),
-            dbc.Row([dbc.Col([html.H2("Estimador de  Parámetros en EDOs", id='main_tit')],
+            dbc.Row([dbc.Col([html.H4("Estimador de  Parámetros en EDOs", id='main_tit')],
                              class_name="pad_tit col-sm-6"),
                      dbc.Col([dbc.NavLink(dbc.Col(dropdown(id), className="drop-dash col-sm-6"))],
                              )],
@@ -93,11 +99,9 @@ def nav_bar(id):
 def side_bar():
     return dbc.Nav(
         [
-
-
             dbc.Nav(
                 [
-                    html.H4("Algoritmos"),
+                    html.H6("Algoritmos"),
                     dbc.RadioItems(options=[{'label': str(j), 'value': str(j)} for j in const.algoritmos],
                                    id='algo_list'),
                     dbc.Alert(
@@ -130,17 +134,7 @@ def side_bar():
                     )],id="navbut")
 
             ,
-        dbc.Nav(
-             [
 
-                 html.Hr(),
-                 dbc.NavLink(
-                     dbc.Button("Visualización PSO", className="button-link ", id='but_viewpso', color="primary",
-                                n_clicks=0, )),
-
-             ],
-             vertical="sm"
-         ),
          html.Hr(),
 
 

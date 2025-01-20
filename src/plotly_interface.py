@@ -2,19 +2,22 @@ import dash
 from dash import html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
-import nav_bar_ODE as nav
-import content_interface as ctif
-import collect_data as colldat
 import pandas as pd
 from dash.exceptions import PreventUpdate
-import constantes as const
 import time
 import numpy as np
 # Save data in memory Cache
-import json
 from dash_extensions.callback import CallbackCache, Trigger
 from flask_caching.backends import FileSystemCache
 import re
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import constantes as const
+from src import nav_bar_ODE as nav
+from src import  content_interface as ctif
+from src import collect_data as colldat
+
 
 
 
@@ -82,21 +85,15 @@ tb_est_0 = "my_tb_est_0"
 # Nombre del algoritmo
 algo = "t"
 
-
-
-
 # Estadisticas
-estadisticas = ctif.estadisticas(tb_est_0, gr_est_0, gr_est_1, gr_est_2)
+
 
 # Model data card
 app_cont_1 = ctif.model_data(value_change, graph)
 
 # Tabla de parametros dimension var
-
-
 # Model description card
 app_cont_2 = ctif.model_description(value_change_2, graph2)
-
 # Optimización card
 app_cont_3 = ctif.algoritmo_proceso(value_change_3, graph5)
 
@@ -106,8 +103,6 @@ id = "dpdw"
 # Barra de navegacion
 app_nav = nav.nav_bar(id)
 # Barra lateral
-
-
 app_sidebar = nav.side_bar()
 
 
@@ -127,7 +122,7 @@ application.layout = html.Div([dbc.Row(
                 [app_sidebar], class_name="col-sm-2", style=nav.NAV_BAR_STYLE
             ),
 
-            dbc.Col([app_cont_1, app_cont_2, app_cont_3, estadisticas],
+            dbc.Col([app_cont_1, app_cont_2, app_cont_3],
                     style=nav.NAV_BAR_STYLE, class_name="col-sm-10"),
 
         ],style=nav.NAV_BAR_STYLE
@@ -161,26 +156,26 @@ def toggle_alert(algo, case,is_open):
 
 
 @application.callback(
-    [Output("but_estadis", "disabled"),Output("odeint", "disabled"),Output("algoexe", "disabled")],
+    [Output("odeint", "disabled"),Output("algoexe", "disabled")],
     [Input(id,"value"),Input("algo_list","value")]
 )
 def enabled_estadisticas_integracion(case, algo_num):
     if (str(case) == '0' and str(algo_num) != '0'):
-        is_off_est = True
+
         is_off_int = True
         is_off_algoexe = True
-        return is_off_est, is_off_int, is_off_algoexe
+        return is_off_int, is_off_algoexe
 
     if not ((case != '0' and case is not None) and (str(algo_num) != '0' and algo_num is not None)):
-        is_off_est = True
+
         is_off_int = True
         is_off_algoexe = True
-        return is_off_est, is_off_int, is_off_algoexe
+        return  is_off_int, is_off_algoexe
     else:
-        is_off_est = False
+
         is_off_int = False
         is_off_algoexe = False
-        return is_off_est, is_off_int, is_off_algoexe
+        return  is_off_int, is_off_algoexe
 
 
 # Descripción de la data experimental y grafico de la misma
@@ -770,16 +765,6 @@ def collapse_cards(n,is_open):
 
 
 
-#Estadisticas
-@application.callback(
-    [Output(const.id_estadisticas, "is_open"),Output("but_estadis","children")],
-    [Input("but_estadis", "n_clicks")],
-    [State(const.id_estadisticas, "is_open")],
-)
-def toggle_collapse(n, is_open):
-    if n:
-        return not is_open,toggle_text(is_open,"Mostrar Estadisticas","Minimizar Estadísticas")
-    return is_open,toggle_text(is_open,"Mostrar Estadisticas","Minimizar Estadísticas")
 
 
 

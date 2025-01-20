@@ -4,14 +4,17 @@ import plotly.express as px
 from dash import dcc
 import math
 import plotly.graph_objects as go
-import odes_solver as ODE_sol
 import numpy as np
-import constantes as const
-import Funcionamiento_PSO as f_pso
+from src import constantes as const
+from src import Funcionamiento_PSO as f_pso
 import dash_bootstrap_components as dbc
 from dash import html
 import re
-from plotly.subplots import make_subplots
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import odes_solver as ODE_sol
+
 
 # Author: Paul Benavides
 # Derechos Reservados
@@ -19,13 +22,13 @@ from plotly.subplots import make_subplots
 
 model_data = {
     0: px.data.iris(),
-    1: pd.read_csv('csv/enzimatic_model.csv', sep=";", usecols=['t', 'y1']),
-    2: pd.read_csv('csv/hepatitis.csv', sep=';', usecols=['tiempo', 'Hs', 'He', 'V', 'T']),
-    3: pd.read_csv('csv/benchmark.csv', sep=";", usecols=['t_data', 'x_data']),
-    4: pd.read_csv('csv/lotka_volterra_model.csv', sep=";",
+    1: pd.read_csv('src/csv/enzimatic_model.csv', sep=";", usecols=['t', 'y1']),
+    2: pd.read_csv('src/csv/hepatitis.csv', sep=';', usecols=['tiempo', 'Hs', 'He', 'V', 'T']),
+    3: pd.read_csv('src/csv/benchmark.csv', sep=";", usecols=['t_data', 'x_data']),
+    4: pd.read_csv('src/csv/lotka_volterra_model.csv', sep=";",
                    usecols=['period', 't', 'competidor x', 'competidor y', 'competidor z']),
-    5: pd.read_csv('csv/hiv.csv', sep=";", usecols=['time', 'lv']),
-    6: pd.read_csv('csv/kinetic_chemistry_model.csv', sep=";", usecols=['t', 'exp_1', 'exp_2', 'vectProm'])
+    5: pd.read_csv('src/csv/hiv.csv', sep=";", usecols=['time', 'lv']),
+    6: pd.read_csv('src/csv/kinetic_chemistry_model.csv', sep=";", usecols=['t', 'exp_1', 'exp_2', 'vectProm'])
 
 }
 
@@ -824,10 +827,10 @@ def MODELO(case):
         id="data_model_2",
         columns=[{"name": i, "id": i} for i in model_analytic],
         data=[],
-        style_cell={'fontSize': '14px'},
-        style_header={'background': '#008cf9', 'color': '#fff', 'fontSize': '14px', 'textAlign': 'center'},
+        style_cell={'fontSize': '10px'},
+        style_header={'background': '#008cf9', 'color': '#fff', 'fontSize': '10px', 'textAlign': 'center'},
         style_table={'height': 'auto', 'width': 'auto', 'overflowX': 'auto', 'overflowY': 'auto'},
-        style_data={'whiteSpace': 'normal', 'height': 'auto'},
+        style_data={'whiteSpace': 'normal', 'height': 'auto','fontSize': '10px'},
         virtualization=False
     )
 

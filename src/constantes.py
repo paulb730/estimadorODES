@@ -1,5 +1,8 @@
 import numpy as np
-import collect_data as colldat
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from src import collect_data as colldat
 
 titulo_text = ["Modeling Data", "Modeling Description", "Algoritmo"]
 

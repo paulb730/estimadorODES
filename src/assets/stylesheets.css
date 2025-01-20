@@ -1,7 +1,7 @@
 .page-link{
     color:#f2f2f2;
     font-size:14px;
-    font-weight: 600;
+    font-weight: 200;
 
 
 }
@@ -9,7 +9,7 @@
 .page-link_2{
      color:#f96d00 ;
      font-size:14px;
-    font-weight: 600;
+    font-weight: 200;
 
 }
 
@@ -19,14 +19,14 @@
      background-color: #f96d00 !important;
      color:#f2f2f2;
     font-size:12px;
-    font-weight: 600;
+    font-weight: 200;
 }
 
 .page-link:active {
     background-color: #f96d00 !important ;
     color:#f2f2f2;
     font-size:12px;
-    font-weight: 600;
+    font-weight: 200;
 
 }
 
@@ -58,7 +58,7 @@
 
     color:#f2f2f2;
     font-size:12px;
-    font-weight: 600;
+    font-weight: 200;
     width: 100%;
     height:auto;
 
@@ -68,7 +68,7 @@
     color:#f2f2f2;
     background:rgb(57, 62, 70) !important;
     font-size:10px;
-    font-weight: 600;
+    font-weight: 200;
     width: 85px;
     height:auto;
 
@@ -170,7 +170,7 @@ flex: 0 0 100% !important;
 
     color:#f2f2f2;
     font-size:18px;
-    font-weight: 600;
+    font-weight: 200;
     width: 100%;
     height:auto;
 
@@ -188,7 +188,7 @@ flex-wrap:wrap;
     display: inline-block;
     color:#393e46;
     font-size:18px;
-    font-weight: 700;
+    font-weight: 200;
     width: 100%;
     height:auto;
     background-color:#f96d00 !important ;
@@ -254,7 +254,7 @@ flex-wrap:nowrap;
 
     color:#f2f2f2;
     font-size:12px;
-    font-weight: 600;
+    font-weight: 200;
     width: 100%;
     height:auto;
 
@@ -266,7 +266,7 @@ flex: 0 0 50% !important;
     display: inline-block;
     color:#393e46;
     font-size:12px;
-    font-weight: 700;
+    font-weight: 200;
     width: 100%;
     height:auto;
     background-color:#f96d00 !important ;
